@@ -1,0 +1,22 @@
+import Image from "next/image";
+
+const images = [
+  { src: "/assests/project2.jpg", alt: "Project 2" },
+  
+];
+
+export default function Gallery() {
+  return (
+    <div>
+      {images.map((img) => (
+        <Image
+          key={img.src}
+          src={img.src}
+          alt={img.alt}
+          width={600}
+          height={400}
+        />
+      ))}
+    </div>
+  );
+}
