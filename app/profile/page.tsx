@@ -18,7 +18,7 @@ export default function ProfilePage() {
         const token = localStorage.getItem("token");
         if (!token) throw new Error("User not logged in");
 
-        const res = await fetch("http://localhost:4000/api/auth/profile", {
+        const res = await fetch("https://my-next-backend-20.onrender.com/api/auth/profile", {
           method: "GET", // explicitly define GET
           headers: {
             "Content-Type": "application/json", // necessary for backend parsing

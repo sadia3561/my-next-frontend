@@ -11,7 +11,7 @@ export default function RegisterPage() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch("https://my-next-backend-17.onrender.com/api/auth/register", {
+      const res = await fetch("https://my-next-backend-20.onrender.com/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
