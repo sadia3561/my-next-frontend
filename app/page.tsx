@@ -1,10 +1,37 @@
-// src/app/page.tsx
-
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const router = useRouter();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault(); // prevent reload
+    setMessage("");
+
+    try {
+      const res = await fetch("https://my-next-backend-20.onrender.com/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Login failed");
+
+      localStorage.setItem("token", data.token);
+      setMessage("✅ Login successful!");
+      setTimeout(() => router.push("/profile"), 800);
+    } catch (err: any) {
+      setMessage("❌ " + err.message);
+    }
+  };
+
   return (
     <main>
       {/* Hero with Login Sidebar */}
@@ -16,9 +43,10 @@ export default function Home() {
             className="object-cover w-full h-full"
           />
         </div>
+
         <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28 w-full">
           <div className="flex flex-col lg:flex-row items-center gap-10">
-            {/* Left Side: Main Hero Content */}
+            {/* Left Side: Hero Content */}
             <div className="lg:w-1/2">
               <h2 className="text-3xl md:text-4xl font-extrabold leading-tight">
                 End-to-end collaboration across the full project lifecycle
@@ -36,59 +64,67 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Side: Login Form (Hidden on Mobile, Visible on lg+ as Sidebar) */}
+            {/* Right Side: Login Form */}
             <div className="hidden lg:flex lg:w-1/2 items-center justify-center">
               <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl shadow-xl w-full max-w-md border border-white/20">
-                <h3 className="text-2xl font-bold text-center mb-6 text-white">Login to Your Account</h3>
-                <form className="space-y-4">
+                <h3 className="text-2xl font-bold text-center mb-6 text-white">
+                  Login to Your Account
+                </h3>
+                <form onSubmit={handleLogin} className="space-y-4">
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-200 mb-2"
+                    >
                       Email or Username
                     </label>
                     <input
                       type="email"
                       id="email"
-                      name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       required
                       className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
                       placeholder="Enter your email or username"
                     />
                   </div>
+
                   <div>
-                    <label htmlFor="password" className="block text-sm font-medium text-gray-200 mb-2">
+                    <label
+                      htmlFor="password"
+                      className="block text-sm font-medium text-gray-200 mb-2"
+                    >
                       Password
                     </label>
                     <input
                       type="password"
                       id="password"
-                      name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       required
                       className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
                       placeholder="Enter your password"
                     />
                   </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <label className="flex items-center text-gray-200">
-                      <input type="checkbox" className="rounded border-gray-300 text-white focus:ring-white/50" />
-                      <span className="ml-2">Remember me</span>
-                    </label>
-                    <Link href="/forgot-password" className="text-indigo-200 hover:text-white transition">
-                      Forgot Password?
-                    </Link>
-                  </div>
+
                   <button
                     type="submit"
                     className="w-full bg-white text-yellow-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-white/50"
                   >
                     Login
                   </button>
+
+                  {message && (
+                    <p className="text-center text-sm mt-2">
+                      {message}
+                    </p>
+                  )}
                 </form>
-              
               </div>
             </div>
           </div>
 
-          {/* Mobile Login Toggle (Optional: Show login on mobile as a button or modal trigger) */}
+          {/* Mobile Login Button */}
           <div className="lg:hidden mt-8 text-center">
             <Link
               href="/login"
@@ -99,6 +135,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
 
       {/* Featured Projects Grid */}
       <section className="py-12">
