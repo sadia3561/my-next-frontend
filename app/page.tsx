@@ -130,7 +130,7 @@ export default function Home() {
               href="/login"
               className="bg-white text-yellow-600 px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition inline-block"
             >
-              Login
+              Login.
             </Link>
           </div>
         </div>
