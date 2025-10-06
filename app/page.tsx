@@ -52,7 +52,7 @@ export default function Home() {
                 End-to-end collaboration across the full project lifecycle
               </h2>
               <p className="mt-4 text-base md:text-lg text-indigo-100">
-                Registration → Tendering → Award → Execution → Billing → AMC → Help Desk → Analytics
+                Registration → Tendering → Award → Execution → Billing → AMC/Help Desk → Analytics
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link

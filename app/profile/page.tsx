@@ -17,6 +17,9 @@ export default function ProfilePage() {
       try {
         const token = localStorage.getItem("token");
         if (!token) throw new Error("User not logged in");
+        const storedRole = localStorage.getItem("role");
+<p>You are logged in as <strong>{storedRole}</strong></p>
+
 
         const res = await fetch("https://my-next-backend-20.onrender.com/api/auth/profile", {
           method: "GET", // explicitly define GET

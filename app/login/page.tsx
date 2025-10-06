@@ -20,6 +20,7 @@ export default function LoginPage() {
       if (!res.ok) throw new Error(data.message || "Login failed");
 
       localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role);
       setMessage("✅ Login successful!");
       setTimeout(() => router.push("/profile"), 500);
     } catch (err: any) {
