@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { MessageSquare, Calendar } from "lucide-react";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -11,11 +12,11 @@ export default function Home() {
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault(); // prevent reload
+    e.preventDefault();
     setMessage("");
 
     try {
-      const res = await fetch("https://my-next-backend-20.onrender.com/api/auth/login", {
+      const res = await fetch("http://localhost:4000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -32,127 +33,194 @@ export default function Home() {
     }
   };
 
+  const registrationRoles = [
+    "Client",
+    "Vendor",
+    "Supplier",
+    "Consultant",
+    "Engineer",
+    "Designer",
+    "Transporter",
+  ];
+
+  const [showRegistrationRoles, setShowRegistrationRoles] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState<{ [key: string]: boolean }>({});
+  const [appointmentOpen, setAppointmentOpen] = useState(false);
+  const [appointmentData, setAppointmentData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    project: "",
+  });
+
+  const handleAppointmentChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setAppointmentData({ ...appointmentData, [e.target.name]: e.target.value });
+  };
+
+  const handleAppointmentSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Appointment submitted successfully!");
+    setAppointmentData({ name: "", email: "", phone: "", project: "" });
+  };
+
+  const toggleDropdown = (stepName: string) => {
+    setDropdownOpen((prev) => ({
+      ...prev,
+      [stepName]: !prev[stepName],
+    }));
+  };
+
   return (
-    <main>
-      {/* Hero with Login Sidebar */}
-      <section className="relative bg-yellow-600 text-white min-h-screen flex items-center">
-        <div className="absolute inset-0 opacity-20">
-          <img
-            src="/assets/hero-bg.jpg"
-            alt="hero background"
-            className="object-cover w-full h-full"
-          />
-        </div>
+    <main className="relative min-h-screen px-6 py-10 text-gray-800">
+      {/* Background Gradient */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-sky-200 via-sky-100 to-white"></div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28 w-full">
-          <div className="flex flex-col lg:flex-row items-center gap-10">
-            {/* Left Side: Hero Content */}
-            <div className="lg:w-1/2">
-              <h2 className="text-3xl md:text-4xl font-extrabold leading-tight">
-                End-to-end collaboration across the full project lifecycle
-              </h2>
-              <p className="mt-4 text-base md:text-lg text-indigo-100">
-                Registration → Tendering → Award → Execution → Billing → AMC/Help Desk → Analytics
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link
-                  href="/lifecycle"
-                  className="bg-white text-yellow-600 px-5 py-3 rounded-md font-semibold hover:bg-gray-100 transition"
-                >
-                  See lifecycle flow
-                </Link>
-              </div>
-            </div>
+      <div className="relative max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-start gap-10">
+        {/* Left Side: Enquiry + Appointment */}
+        <div className="lg:w-1/2 flex flex-col gap-6">
+          {/* Enquiry Heading */}
+          <div className="flex items-center gap-2 text-sky-800 text-2xl font-bold">
+            <MessageSquare className="w-6 h-6 text-sky-700" />
+            <span>Enquiry</span>
+          </div>
 
-            {/* Right Side: Login Form */}
-            <div className="hidden lg:flex lg:w-1/2 items-center justify-center">
-              <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl shadow-xl w-full max-w-md border border-white/20">
-                <h3 className="text-2xl font-bold text-center mb-6 text-white">
-                  Login to Your Account
-                </h3>
-                <form onSubmit={handleLogin} className="space-y-4">
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-200 mb-2"
-                    >
-                      Email or Username
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
-                      placeholder="Enter your email or username"
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="password"
-                      className="block text-sm font-medium text-gray-200 mb-2"
-                    >
-                      Password
-                    </label>
-                    <input
-                      type="password"
-                      id="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      className="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
-                      placeholder="Enter your password"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full bg-white text-yellow-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-white/50"
-                  >
-                    Login
-                  </button>
-
-                  {message && (
-                    <p className="text-center text-sm mt-2">
-                      {message}
-                    </p>
-                  )}
-                </form>
-              </div>
+          {/* Enquiry Dropdown */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-white text-gray-800 rounded-lg shadow p-2 hover:shadow-lg transition">
+              <button
+                onClick={() => {
+                  setShowRegistrationRoles(!showRegistrationRoles);
+                  toggleDropdown("Enquiry");
+                }}
+                className="w-full text-left font-semibold text-sky-700 hover:underline px-2 py-1 flex justify-between items-center"
+              >
+                Enquiry
+                <span>{dropdownOpen["Enquiry"] ? "▲" : "▼"}</span>
+              </button>
+              {showRegistrationRoles && (
+                <ul className="pl-2 border-l-2 border-sky-400 bg-sky-50 mt-2 rounded-md">
+                  {registrationRoles.map((role) => (
+                    <li key={role}>
+                      <Link
+                        href={`/registration/${role.toLowerCase()}`}
+                        className="block px-2 py-1 text-gray-700 hover:bg-sky-100 rounded"
+                      >
+                        {role}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
 
-          {/* Mobile Login Button */}
-          <div className="lg:hidden mt-8 text-center">
-            <Link
-              href="/login"
-              className="bg-white text-yellow-600 px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition inline-block"
+          {/* Appointment Section */}
+          <div className="bg-white text-gray-800 rounded-lg shadow p-4 w-full max-w-md mt-4">
+            <button
+              onClick={() => setAppointmentOpen(!appointmentOpen)}
+              className="flex justify-between items-center w-full font-semibold text-lg px-3 py-2 hover:bg-gray-100 rounded"
             >
-              Login.
-            </Link>
+              <div className="flex items-center gap-4">
+                <Calendar className="w-5 h-5 text-sky-700" />
+                Appointment
+              </div>
+              <span>{appointmentOpen ? "▲" : "▼"}</span>
+            </button>
+
+            {appointmentOpen && (
+              <form onSubmit={handleAppointmentSubmit} className="mt-4 space-y-4">
+                {["name", "email", "phone", "project"].map((field) => (
+                  <div key={field}>
+                    <label className="block font-medium mb-1 capitalize">
+                      {field === "project" ? "Requirements" : field}
+                    </label>
+                    {field !== "project" ? (
+                      <input
+                        type={field === "email" ? "email" : "text"}
+                        name={field}
+                        value={appointmentData[field as keyof typeof appointmentData]}
+                        onChange={handleAppointmentChange}
+                        className="w-full border rounded px-3 py-2"
+                        placeholder={`Your ${field}`}
+                        required
+                      />
+                    ) : (
+                      <textarea
+                        name={field}
+                        value={appointmentData.project}
+                        onChange={handleAppointmentChange}
+                        className="w-full border rounded px-3 py-2"
+                        placeholder="Tell us about your requirements"
+                        rows={4}
+                        required
+                      ></textarea>
+                    )}
+                  </div>
+                ))}
+                <button
+                  type="submit"
+                  className="w-full bg-sky-700 text-white font-semibold py-2 rounded hover:bg-sky-800 transition"
+                >
+                  Submit
+                </button>
+              </form>
+            )}
           </div>
         </div>
-      </section>
 
+        {/* Right Side: Login Box */}
+        <div className="hidden lg:flex lg:w-1/2 justify-center">
+          <div className="bg-white p-6 rounded-2xl shadow-xl w-80 border border-white/20">
+            <h3 className="text-2xl font-bold text-center mb-4 text-gray-800">
+              Login to Your Account
+            </h3>
+            <form onSubmit={handleLogin} className="space-y-3">
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-400 text-gray-900 placeholder-gray-500"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-400 text-gray-900 placeholder-gray-500"
+              />
+              <button
+                type="submit"
+                className="w-full bg-sky-700 text-white font-semibold py-2 rounded hover:bg-sky-800 transition"
+              >
+                Login
+              </button>
+              {message && (
+                <p className="text-center text-sm mt-1 text-red-500">{message}</p>
+              )}
+            </form>
+          </div>
+        </div>
+      </div>
 
-      {/* Featured Projects Grid */}
-      <section className="py-12">
+      {/* Featured Projects */}
+      <section className="py-12 mt-16">
         <div className="max-w-7xl mx-auto px-6">
-          <h3 className="text-2xl font-semibold text-center mb-8">Featured Projects</h3>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <h3 className="text-2xl font-semibold text-center mb-8 text-sky-800">
+            Featured Projects
+          </h3>
+          <div className="flex flex-wrap justify-center gap-10">
             {[1, 2, 3].map((i) => (
               <article
                 key={i}
-                className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition"
+                className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition w-80"
               >
                 <img
                   src={`/assets/project${i}.jpg`}
                   alt={`Project ${i}`}
-                  width={400}
-                  height={160}
-                  className="w-full h-40 object-cover"
+                  className="w-600 h-60 object-cover rounded-t-lg"
                 />
                 <div className="p-4">
                   <h4 className="font-semibold text-gray-800">PROJECT CAPTION {i}</h4>
@@ -161,37 +229,6 @@ export default function Home() {
                   </p>
                 </div>
               </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Quick Ecosystem */}
-      <section className="py-10 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <h3 className="text-2xl font-semibold text-center mb-8">Quick Ecosystem Access</h3>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { title: "Vendors", link: "/vendors" },
-              { title: "Suppliers", link: "/suppliers" },
-              { title: "Consultants", link: "/consultants" },
-              { title: "Construction", link: "/construction" },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition cursor-pointer"
-              >
-                <h4 className="font-semibold text-gray-800">{item.title}</h4>
-                <p className="text-sm text-gray-600 mt-1">
-                  Short description about {item.title}.
-                </p>
-                <Link
-                  href={item.link}
-                  className="text-indigo-600 mt-2 inline-block hover:text-indigo-800 font-medium"
-                >
-                  Details →
-                </Link>
-              </div>
             ))}
           </div>
         </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -10,7 +11,22 @@ export default function Navbar() {
 
   return (
     <nav className="bg-blue-900 text-white p-4 flex justify-between items-center relative">
-      <div className="text-xl font-bold">ANI MEPF & ELV</div>
+       {/* Left Section with Logo + Title */}
+<div className="flex items-center space-x-3">
+  <div className="w-16 h-16 bg-white rounded-md overflow-hidden flex items-center justify-center shadow-md">
+    <Image
+      src="/logoo.png"
+      alt="Aabha Nexus Innovations Logo"
+      width={64}
+      height={64}
+      className="object-contain"
+    />
+  </div>
+  <div className="text-xl font-bold tracking-wide">
+    ANI <span className="text-yellow-300">MEPF & ELV</span>
+  </div>
+</div>
+
 
       {/* Desktop Menu */}
       <ul className="hidden md:flex items-center space-x-6 flex-nowrap overflow-x-auto whitespace-nowrap">
