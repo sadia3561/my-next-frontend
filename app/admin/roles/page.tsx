@@ -1,55 +1,110 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-interface Role {
-  id: string;
+interface UserRole {
+  id: number;
   name: string;
-  permissions: string[];
+  email: string;
+  currentRole: "SUPER_ADMIN" | "ORG_ADMIN" | "USER";
 }
 
 export default function AdminRolesPage() {
-  const [roles, setRoles] = useState<Role[]>([]);
-  const [name, setName] = useState("");
-  const [permissions, setPermissions] = useState("");
+  const [users, setUsers] = useState<UserRole[]>([]);
+  const [selectedUser, setSelectedUser] = useState<UserRole | null>(null);
 
-  const fetchRoles = () => {
-    fetch("/api/admin/roles", { credentials: "include" })
-      .then((res) => res.json())
-      .then(setRoles);
-  };
+  // Dummy data
+  useEffect(() => {
+    setUsers([
+      {
+        id: 1,
+        name: "Riya Mehta",
+        email: "riya@aabha.com",
+        currentRole: "ORG_ADMIN",
+      },
+      {
+        id: 2,
+        name: "Arjun Singh",
+        email: "arjun@buildpro.com",
+        currentRole: "USER",
+      },
+    ]);
+  }, []);
 
-  useEffect(fetchRoles, []);
-
-  const handleCreate = async () => {
-    await fetch("/api/admin/roles", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, permissions: permissions.split(",") }),
-      credentials: "include",
-    });
-    setName("");
-    setPermissions("");
-    fetchRoles();
+  const updateRole = (id: number, role: UserRole["currentRole"]) => {
+    setUsers((prev) =>
+      prev.map((u) => (u.id === id ? { ...u, currentRole: role } : u))
+    );
+    setSelectedUser(null);
   };
 
   return (
-    <div className="p-8 max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Admin Roles Management</h1>
+    <div className="min-h-screen bg-gray-100 p-8">
+      <h1 className="text-2xl font-semibold mb-6 text-gray-800">
+        Admin Role Management
+      </h1>
 
-      <div className="mb-6 space-y-2">
-        <input type="text" placeholder="Role Name" value={name} onChange={e => setName(e.target.value)} className="border px-3 py-1 rounded w-full"/>
-        <input type="text" placeholder="Permissions (comma-separated)" value={permissions} onChange={e => setPermissions(e.target.value)} className="border px-3 py-1 rounded w-full"/>
-        <button onClick={handleCreate} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Create Role</button>
+      <div className="bg-white rounded-xl shadow-md overflow-x-auto">
+        <table className="min-w-full border text-left">
+          <thead className="bg-gray-200 text-gray-700 text-sm uppercase">
+            <tr>
+              <th className="p-3 border">Name</th>
+              <th className="p-3 border">Email</th>
+              <th className="p-3 border">Role</th>
+              <th className="p-3 border">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.id} className="border-b hover:bg-gray-50">
+                <td className="p-3 border">{user.name}</td>
+                <td className="p-3 border">{user.email}</td>
+                <td className="p-3 border text-blue-700 font-medium">
+                  {user.currentRole}
+                </td>
+                <td className="p-3 border">
+                  <button
+                    onClick={() => setSelectedUser(user)}
+                    className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                  >
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
-      <ul>
-        {roles.map(role => (
-          <li key={role.id} className="border p-3 rounded mb-2">
-            <strong>{role.name}</strong>: {role.permissions.join(", ")}
-          </li>
-        ))}
-      </ul>
+      {/* Role edit modal */}
+      {selectedUser && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-[400px]">
+            <h2 className="text-lg font-semibold mb-3">
+              Change Role: {selectedUser.name}
+            </h2>
+
+            <select
+              className="border w-full p-2 mb-4 rounded"
+              value={selectedUser.currentRole}
+              onChange={(e) =>
+                updateRole(selectedUser.id, e.target.value as UserRole["currentRole"])
+              }
+            >
+              <option value="SUPER_ADMIN">SUPER_ADMIN</option>
+              <option value="ORG_ADMIN">ORG_ADMIN</option>
+              <option value="USER">USER</option>
+            </select>
+
+            <button
+              onClick={() => setSelectedUser(null)}
+              className="text-gray-700 border px-3 py-1 rounded w-full"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

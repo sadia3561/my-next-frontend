@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { MessageSquare, Calendar } from "lucide-react";
 
 export default function Home() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const router = useRouter();
@@ -19,7 +19,7 @@ export default function Home() {
       const res = await fetch("http://localhost:4000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await res.json();
@@ -48,7 +48,7 @@ export default function Home() {
   const [appointmentOpen, setAppointmentOpen] = useState(false);
   const [appointmentData, setAppointmentData] = useState({
     name: "",
-    email: "",
+    username: "",
     phone: "",
     project: "",
   });
@@ -62,7 +62,7 @@ export default function Home() {
   const handleAppointmentSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert("Appointment submitted successfully!");
-    setAppointmentData({ name: "", email: "", phone: "", project: "" });
+    setAppointmentData({ name: "", username: "", phone: "", project: "" });
   };
 
   const toggleDropdown = (stepName: string) => {
@@ -131,14 +131,14 @@ export default function Home() {
 
             {appointmentOpen && (
               <form onSubmit={handleAppointmentSubmit} className="mt-4 space-y-4">
-                {["name", "email", "phone", "project"].map((field) => (
+                {["name", "username", "phone", "project"].map((field) => (
                   <div key={field}>
                     <label className="block font-medium mb-1 capitalize">
                       {field === "project" ? "Requirements" : field}
                     </label>
                     {field !== "project" ? (
                       <input
-                        type={field === "email" ? "email" : "text"}
+                        type="text"
                         name={field}
                         value={appointmentData[field as keyof typeof appointmentData]}
                         onChange={handleAppointmentChange}
@@ -178,10 +178,10 @@ export default function Home() {
             </h3>
             <form onSubmit={handleLogin} className="space-y-3">
               <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-400 text-gray-900 placeholder-gray-500"
               />
               <input

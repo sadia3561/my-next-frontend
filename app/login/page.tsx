@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [message, setMessage] = useState("");
@@ -18,7 +18,7 @@ export default function LoginPage() {
       const res = await fetch("http://localhost:4000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await res.json();
@@ -27,7 +27,7 @@ export default function LoginPage() {
       // Save token (JWT) in localStorage
       localStorage.setItem("token", data.token);
 
-      // Optional: Remember me logic (example)
+      // Optional: Remember me logic
       if (rememberMe) {
         localStorage.setItem("rememberMe", "true");
       }
@@ -60,9 +60,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-400 via-blue-300 to-white">
-      <div className="bg-white p-8 rounded-2xl shadow-2xl w-96">
-        <h2 className="text-2xl font-bold text-center mb-6 text-blue-900">Login</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-6 py-12">
+      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-lg text-gray-900">
+        <h2 className="text-2xl font-bold text-blue-900 mb-6 text-center">
+          Login
+        </h2>
 
         {message && (
           <p className={`text-center mb-4 ${message.startsWith("✅") ? "text-green-600" : "text-red-600"}`}>
@@ -72,20 +74,20 @@ export default function LoginPage() {
 
         <form onSubmit={handleLogin} className="space-y-4">
           <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
             required
-            className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
             required
-            className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
           />
 
           <div className="flex justify-between items-center text-sm">
@@ -94,26 +96,26 @@ export default function LoginPage() {
                 type="checkbox"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                className="accent-sky-500"
+                className="accent-blue-500"
               />
               <span>Remember me</span>
             </label>
-            <a href="/forgot-password" className="text-sky-600 hover:underline">
+            <a href="/forgot-password" className="text-blue-600 hover:underline">
               Forgot Password?
             </a>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-sky-500 hover:bg-sky-600 text-white py-2 rounded-lg font-semibold transition-all duration-300"
+            className="w-full bg-blue-700 text-white py-2 rounded hover:bg-blue-800 text-sm font-medium"
           >
             Login
           </button>
         </form>
 
-        <p className="text-center text-sm mt-4">
+        <p className="text-center text-sm mt-6">
           Don’t have an account?{" "}
-          <a href="/register-org" className="text-sky-600 hover:underline">
+          <a href="/register-org" className="text-blue-600 hover:underline">
             Register
           </a>
         </p>
