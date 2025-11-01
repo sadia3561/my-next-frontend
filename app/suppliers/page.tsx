@@ -1,43 +1,41 @@
 // FILE: app/suppliers/page.tsx
-import Link from "next/link";
+"use client";
 
-export const metadata = {
-  title: "Suppliers — Your Company",
-};
+import Image from "next/image";
 
 export default function SuppliersPage() {
   return (
-    <div className="bg-gray-50 text-gray-800 min-h-screen">
-      {/* Header */}
-      <header className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold">
-              YC
-            </div>
-          </Link>
-          <nav className="space-x-6 text-sm">
-            <Link href="/">Home</Link>
-            <Link href="/ecosystem">Ecosystem</Link>
-            <Link href="/vendors">Vendors</Link>
-            <Link
-              href="/contact"
-              className="text-white bg-indigo-600 px-4 py-2 rounded-md"
-            >
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </header>
+    <div className="min-h-screen bg-gray-50 px-6 py-12">
+      {/* Image 1 */}
+      <div className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-lg mb-8">
+        <Image
+          src="/assets/ser10.jpg" // ← pehli image ka path
+          alt="ser10"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
 
-      {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-6 py-14">
-        <h2 className="text-3xl font-bold">Suppliers</h2>
-        <p className="mt-2 text-gray-600">
-          Procurement, purchase orders, delivery schedules and inventory
-          coordination.
-        </p>
-      </main>
+      {/* Image 2 */}
+      <div className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-lg mb-8">
+        <Image
+          src="/assets/ser11.jpg" // ← doosri image ka path
+          alt="ser11"
+          fill
+          className="object-cover"
+        />
+      </div>
+
+      {/* Image 3 */}
+      <div className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-lg">
+        <Image
+          src="/assets/ser12.jpg" // ← teesri image ka path
+          alt="ser12"
+          fill
+          className="object-cover"
+        />
+      </div>
     </div>
   );
 }

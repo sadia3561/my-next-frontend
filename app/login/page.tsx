@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -24,18 +25,12 @@ export default function LoginPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Login failed");
 
-      // Save token (JWT) in localStorage
       localStorage.setItem("token", data.token);
-
-      // Optional: Remember me logic
-      if (rememberMe) {
-        localStorage.setItem("rememberMe", "true");
-      }
+      if (rememberMe) localStorage.setItem("rememberMe", "true");
 
       setMessage("✅ Login successful! Redirecting...");
 
-      // Redirect based on role
-      const role = data.user.role; // assuming backend sends role
+      const role = data.user.role;
       switch (role) {
         case "super_admin":
           router.push("/app/dashboard");
@@ -60,14 +55,30 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-6 py-12">
-      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-lg text-gray-900">
+    <div className="relative min-h-screen flex items-center justify-center bg-gray-100 overflow-hidden">
+      {/* 🌐 Full Page Background Logo */}
+      <div className="absolute inset-0 w-full h-full opacity-20 blur-[2px] select-none">
+        <Image
+          src="/logoo.png" // 👈 apna logo path (public folder me)
+          alt="Background Logo"
+          fill
+          className="object-contain object-center"
+          priority
+        />
+      </div>
+
+      {/* 🟦 Login Box */}
+      <div className="relative z-10 max-w-md w-full bg-white/90 p-8 rounded-2xl shadow-2xl backdrop-blur-[3px]">
         <h2 className="text-2xl font-bold text-blue-900 mb-6 text-center">
           Login
         </h2>
 
         {message && (
-          <p className={`text-center mb-4 ${message.startsWith("✅") ? "text-green-600" : "text-red-600"}`}>
+          <p
+            className={`text-center mb-4 ${
+              message.startsWith("✅") ? "text-green-600" : "text-red-600"
+            }`}
+          >
             {message}
           </p>
         )}
@@ -107,7 +118,7 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="w-full bg-blue-700 text-white py-2 rounded hover:bg-blue-800 text-sm font-medium"
+            className="w-full bg-blue-700 text-white py-2 rounded hover:bg-blue-800 text-sm font-medium shadow-md"
           >
             Login
           </button>

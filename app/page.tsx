@@ -114,104 +114,145 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Enquiry + Welcome Section */}
-      <section className="max-w-7xl mx-auto mt-10 px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-        {/* Enquiry */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6 hover:shadow-md transition h-fit">
-          <div className="flex items-center gap-2 text-sky-900 text-xl font-semibold mb-4">
-            <MessageSquare className="w-6 h-6 text-sky-700" />
-            Enquiry
-          </div>
-          <button
-            onClick={() => setShowRoles((prev) => !prev)}
-            className="w-full text-left bg-sky-50 border border-sky-200 rounded px-3 py-2 font-medium text-sky-800 hover:bg-sky-100 flex justify-between"
-          >
-            Registration Roles <span>{showRoles ? "▲" : "▼"}</span>
-          </button>
+    <section
+  className="relative bg-cover bg-center bg-no-repeat py-14 px-2 sm:px-4 md:px-6 lg:px-8"
+  style={{ backgroundImage: "url('/assets/ser14.jpg')" }}
+>
+  {/* Subtle overlay for readability */}
+  <div className="absolute inset-0 bg-black/20"></div>
 
-          <div
-            className={`transition-all duration-300 overflow-hidden ${
-              showRoles ? "max-h-60 mt-3" : "max-h-0"
-            }`}
-          >
-            <ul className="pl-3 border-l-2 border-sky-400">
-              {registrationRoles.map((role) => (
-                <li key={role}>
-                  <Link
-                    href={`/registration/${role.toLowerCase()}`}
-                    className="block py-1 text-gray-700 hover:text-sky-700"
-                  >
-                    {role}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+  {/* Boxes Container */}
+  <div className="relative max-w-[95vw] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5 z-10">
+    
+    {/* 🔹 Enquiry Box */}
+    <div className="backdrop-blur-sm bg-white/3 border border-white/15 rounded-2xl shadow-xl p-6 lg:p-8 hover:shadow-2xl transition-all duration-300 text-white">
+      <div className="flex flex-col gap-3 mb-4">
+        <div className="flex items-center gap-2 text-2xl font-semibold text-sky-200">
+          <MessageSquare className="w-6 h-6 text-sky-300" />
+          <p>Enquiry</p>
         </div>
 
-        {/* Welcome + Appointment */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6 hover:shadow-md transition h-fit">
-          <div>
-            <h2 className="text-lg font-semibold text-sky-800 mb-2">
-              Welcome........                                                                  
-                                                           ..
-            </h2>
-            <p className="text-gray-700 text-sm leading-relaxed">
-              hello..                                                   
-                                                           ..
-            </p>
-          </div>
+        <p className="text-lg font-semibold text-white">
+          We are Certified Engineers
+        </p>
+        <p className="text-sm tracking-wide text-sky-100">
+          MEPF & ELV SOLUTIONS — SMART, SCALABLE & SUSTAINABLE
+        </p>
+        <p className="text-sky-50 leading-relaxed text-[15px]">
+          <b>Aabha Nexus Innovations</b> is your trusted partner in comprehensive
+          MEPF and ELV solutions, offering cutting-edge technology and unmatched
+          project execution across India. We combine innovation with reliability
+          to deliver systems that stand the test of time.
+        </p>
+      </div>
 
-          <div className="mt-6">
+      <button
+        onClick={() => setShowRoles((prev) => !prev)}
+        className="w-full text-left bg-sky-700/30 border border-sky-400/40 rounded-md px-4 py-2 font-medium text-white hover:bg-sky-700/50 flex justify-between transition"
+      >
+        Registration Roles <span>{showRoles ? "▲" : "▼"}</span>
+      </button>
+
+      <div
+        className={`transition-all duration-300 overflow-hidden ${
+          showRoles ? "max-h-60 mt-3" : "max-h-0"
+        }`}
+      >
+        <ul className="pl-4 border-l-2 border-sky-400/60 space-y-1">
+          {registrationRoles.map((role) => (
+            <li key={role}>
+              <Link
+                href={`/registration/${role.toLowerCase()}`}
+                className="block py-1 text-sky-100 hover:text-white transition"
+              >
+                {role}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    {/* 🔸 Welcome + Appointment Box */}
+    <div className="backdrop-blur-sm bg-white/3 border border-white/15 rounded-2xl shadow-xl p-6 lg:p-8 hover:shadow-2xl transition-all duration-300 text-white flex flex-col justify-between">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-white mb-2">
+          WELCOME TO AABHA NEXUS
+        </h2>
+        <h3 className="text-lg font-semibold text-sky-100 mb-3">
+          Your Engineering Solutions Partner
+        </h3>
+        <p className="text-sky-50 text-[15px] leading-relaxed">
+          <b>Aabha Nexus Innovations (ANI)</b> is a leading MEPF & ELV consulting
+          and project execution firm. We provide smart, scalable, and sustainable
+          engineering solutions tailored to the needs of commercial and
+          institutional clients.
+          <br />
+          <br />
+          With over a decade of experience, we've successfully delivered
+          <b> 150+ projects across India</b>, maintaining the highest standards of
+          quality and safety. Our team of certified professionals brings technical
+          expertise and innovative thinking to every challenge.
+        </p>
+      </div>
+
+      <div>
+        <button
+          onClick={() => setAppointmentOpen((prev) => !prev)}
+          className="w-full bg-sky-700/60 text-white py-2.5 rounded-md hover:bg-sky-800/80 flex items-center justify-center gap-2 font-medium transition"
+        >
+          <Calendar className="w-5 h-5" />
+          Book Appointment
+        </button>
+
+        <div
+          className={`transition-all duration-300 overflow-hidden ${
+            appointmentOpen ? "max-h-[600px] mt-5" : "max-h-0"
+          }`}
+        >
+          <form className="space-y-3 border-t border-white/30 pt-4">
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="w-full bg-white/10 text-white placeholder-white/70 border border-white/40 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email Address"
+              className="w-full bg-white/10 text-white placeholder-white/70 border border-white/40 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
+              required
+            />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              className="w-full bg-white/10 text-white placeholder-white/70 border border-white/40 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
+              required
+            />
+            <textarea
+              placeholder="Project Requirements / Message"
+              className="w-full bg-white/10 text-white placeholder-white/70 border border-white/40 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
+              rows={3}
+              required
+            ></textarea>
             <button
-              onClick={() => setAppointmentOpen((prev) => !prev)}
-              className="w-full bg-sky-800 text-white py-2 rounded-md hover:bg-sky-900 flex items-center justify-center gap-2"
+              type="submit"
+              className="w-full bg-sky-700/70 text-white py-2 rounded-md hover:bg-sky-800 transition font-medium"
             >
-              <Calendar className="w-5 h-5" />
-              Appointment
+              Submit
             </button>
-
-            <div
-              className={`transition-all duration-300 overflow-hidden ${
-                appointmentOpen ? "max-h-[500px] mt-4" : "max-h-0"
-              }`}
-            >
-              <form className="space-y-3 border-t pt-3">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-sky-300"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Username"
-                  className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-sky-300"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Phone"
-                  className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-sky-300"
-                  required
-                />
-                <textarea
-                  placeholder="Project Requirements"
-                  className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-sky-300"
-                  rows={3}
-                  required
-                ></textarea>
-                <button
-                  type="submit"
-                  className="w-full bg-sky-700 text-white py-2 rounded hover:bg-sky-800"
-                >
-                  Submit
-                </button>
-              </form>
-            </div>
-          </div>
+          </form>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
       
     {/* 🌆 Featured Projects Section */}
 <section className="relative w-full py-20 bg-gradient-to-b from-gray-900 via-sky-950 to-gray-900 text-white overflow-hidden">
@@ -237,7 +278,9 @@ export default function Home() {
         "/assets/featured3.jpg",
         "/assets/featured4.jpg",
         "/assets/featured5.jpg",
-        "/assets/featured6.jpg",
+        "/assets/ser8.jpg",
+        "/assets/ser9.jpg",
+        "/assets/ser10.jpg",
       ].map((src, i) => {
         const indexDiff = (i - current + 6) % 6;
         let className =
