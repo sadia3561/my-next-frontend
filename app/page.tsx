@@ -128,8 +128,8 @@ export default function Home() {
     <div className="backdrop-blur-sm bg-white/3 border border-white/15 rounded-2xl shadow-xl p-6 lg:p-8 hover:shadow-2xl transition-all duration-300 text-white">
       <div className="flex flex-col gap-3 mb-4">
         <div className="flex items-center gap-2 text-2xl font-semibold text-sky-200">
-          <MessageSquare className="w-6 h-6 text-sky-300" />
-          <p>Enquiry</p>
+          
+          <p></p>
         </div>
 
         <p className="text-lg font-semibold text-white">
@@ -150,7 +150,7 @@ export default function Home() {
         onClick={() => setShowRoles((prev) => !prev)}
         className="w-full text-left bg-sky-700/30 border border-sky-400/40 rounded-md px-4 py-2 font-medium text-white hover:bg-sky-700/50 flex justify-between transition"
       >
-        Registration Roles <span>{showRoles ? "▲" : "▼"}</span>
+        Enquiry <span>{showRoles ? "▲" : "▼"}</span>
       </button>
 
       <div
