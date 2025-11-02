@@ -229,6 +229,50 @@ export default function Home() {
               className="w-full bg-white/10 text-white placeholder-white/70 border border-white/40 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
               required
             />
+
+           {/* Date */}
+      <input
+        type="date"
+        placeholder="Preferred Date"
+        className="w-full bg-white/10 text-white placeholder-white/70 border border-white/40 rounded-md px-3 py-2 text-sm [color-scheme:dark] focus:ring-2 focus:ring-sky-300 focus:outline-none"
+        required
+      />
+
+      {/* Time */}
+      <div className="flex gap-2">
+        <select
+          className="flex-1 appearance-none bg-white/10 text-white border border-white/40 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none [&>*]:text-black"
+          required
+        >
+          <option value="">Hour</option>
+          {Array.from({ length: 12 }, (_, i) => (
+            <option key={i + 1} value={i + 1}>
+              {i + 1}
+            </option>
+          ))}
+        </select>
+
+        <select
+          className="flex-1 appearance-none bg-white/10 text-white border border-white/40 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none [&>*]:text-black"
+          required
+        >
+          <option value="">Minute</option>
+          {["00", "15", "30", "45"].map((m) => (
+            <option key={m} value={m}>
+              {m}
+            </option>
+          ))}
+        </select>
+
+        <select
+          className="w-20 appearance-none bg-white/10 text-white border border-white/40 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none [&>*]:text-black"
+          required
+        >
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
+        </select>
+      </div>
+      
             <textarea
               placeholder="Project Requirements / Message"
               className="w-full bg-white/10 text-white placeholder-white/70 border border-white/40 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
