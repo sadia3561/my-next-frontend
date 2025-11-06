@@ -59,17 +59,20 @@ export default function Home() {
   const prevImage = () => setCurrent((prev) => (prev - 1 + 5) % 5);
 
   return (
+    
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-sky-100 to-blue-100 text-gray-900 font-sans">
       {/* Header */}
+      <div className="pt-24"></div>
       <header className="flex justify-between items-center px-10 py-4 bg-white shadow border-b border-gray-200">
         <div className="flex items-center gap-3">
           <img src="/logoo.png" alt="Logo" className="w-12 h-12" />
           <h1 className="text-2xl font-semibold text-sky-900 tracking-wide">
-            Aabha nexus innovation
+            Aabha Nexus Innovation
           </h1>
         </div>
 
         {/* Login */}
+        
         <div className="relative" ref={loginRef}>
           <button
             onClick={() => setLoginOpen(!loginOpen)}
@@ -114,200 +117,15 @@ export default function Home() {
         </div>
       </header>
 
-    <section
-  className="relative bg-cover bg-center bg-no-repeat py-14 px-2 sm:px-4 md:px-6 lg:px-8"
-  style={{ backgroundImage: "url('/assets/ser14.jpg')" }}
->
-  {/* Subtle overlay for readability */}
-  <div className="absolute inset-0 bg-black/20"></div>
 
-  {/* Boxes Container */}
-  <div className="relative max-w-[95vw] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5 z-10">
-    
-    {/* 🔹 Enquiry Box */}
-    <div className="backdrop-blur-sm bg-white/3 border border-white/15 rounded-2xl shadow-xl p-6 lg:p-8 hover:shadow-2xl transition-all duration-300 text-white">
-      <div className="flex flex-col gap-3 mb-4">
-        <div className="flex items-center gap-2 text-2xl font-semibold text-sky-200">
-          
-          <p></p>
-        </div>
-
-        <p className="text-lg font-semibold text-white">
-          We are Certified Engineers
-        </p>
-        <p className="text-sm tracking-wide text-sky-100">
-          MEPF & ELV SOLUTIONS — SMART, SCALABLE & SUSTAINABLE
-        </p>
-        <p className="text-sky-50 leading-relaxed text-[15px]">
-          <b>Aabha Nexus Innovations</b> is your trusted partner in comprehensive
-          MEPF and ELV solutions, offering cutting-edge technology and unmatched
-          project execution across India. We combine innovation with reliability
-          to deliver systems that stand the test of time.
-        </p>
-      </div>
-
-      <button
-        onClick={() => setShowRoles((prev) => !prev)}
-        className="w-full text-left bg-sky-700/30 border border-sky-400/40 rounded-md px-4 py-2 font-medium text-white hover:bg-sky-700/50 flex justify-between transition"
-      >
-        Enquiry <span>{showRoles ? "▲" : "▼"}</span>
-      </button>
-
-      <div
-        className={`transition-all duration-300 overflow-hidden ${
-          showRoles ? "max-h-60 mt-3" : "max-h-0"
-        }`}
-      >
-        <ul className="pl-4 border-l-2 border-sky-400/60 space-y-1">
-          {registrationRoles.map((role) => (
-            <li key={role}>
-              <Link
-                href={`/registration/${role.toLowerCase()}`}
-                className="block py-1 text-sky-100 hover:text-white transition"
-              >
-                {role}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-
-    {/* 🔸 Welcome + Appointment Box */}
-    <div className="backdrop-blur-sm bg-white/3 border border-white/15 rounded-2xl shadow-xl p-6 lg:p-8 hover:shadow-2xl transition-all duration-300 text-white flex flex-col justify-between">
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold text-white mb-2">
-          WELCOME TO AABHA NEXUS
-        </h2>
-        <h3 className="text-lg font-semibold text-sky-100 mb-3">
-          Your Engineering Solutions Partner
-        </h3>
-        <p className="text-sky-50 text-[15px] leading-relaxed">
-          <b>Aabha Nexus Innovations (ANI)</b> is a leading MEPF & ELV consulting
-          and project execution firm. We provide smart, scalable, and sustainable
-          engineering solutions tailored to the needs of commercial and
-          institutional clients.
-          <br />
-          <br />
-          With over a decade of experience, we've successfully delivered
-          <b> 150+ projects across India</b>, maintaining the highest standards of
-          quality and safety. Our team of certified professionals brings technical
-          expertise and innovative thinking to every challenge.
-        </p>
-      </div>
-
-      <div>
-        <button
-          onClick={() => setAppointmentOpen((prev) => !prev)}
-          className="w-full bg-sky-700/60 text-white py-2.5 rounded-md hover:bg-sky-800/80 flex items-center justify-center gap-2 font-medium transition"
-        >
-          <Calendar className="w-5 h-5" />
-          Book Appointment
-        </button>
-
-        <div
-          className={`transition-all duration-300 overflow-hidden ${
-            appointmentOpen ? "max-h-[600px] mt-5" : "max-h-0"
-          }`}
-        >
-          <form className="space-y-3 border-t border-white/30 pt-4">
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full bg-white/10 text-white placeholder-white/70 border border-white/40 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
-              required
-            />
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full bg-white/10 text-white placeholder-white/70 border border-white/40 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
-              required
-            />
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              className="w-full bg-white/10 text-white placeholder-white/70 border border-white/40 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
-              required
-            />
-
-           {/* Date */}
-      <input
-        type="date"
-        placeholder="Preferred Date"
-        className="w-full bg-white/10 text-white placeholder-white/70 border border-white/40 rounded-md px-3 py-2 text-sm [color-scheme:dark] focus:ring-2 focus:ring-sky-300 focus:outline-none"
-        required
-      />
-
-      {/* Time */}
-      <div className="flex gap-2">
-        <select
-          className="flex-1 appearance-none bg-white/10 text-white border border-white/40 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none [&>*]:text-black"
-          required
-        >
-          <option value="">Hour</option>
-          {Array.from({ length: 12 }, (_, i) => (
-            <option key={i + 1} value={i + 1}>
-              {i + 1}
-            </option>
-          ))}
-        </select>
-
-        <select
-          className="flex-1 appearance-none bg-white/10 text-white border border-white/40 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none [&>*]:text-black"
-          required
-        >
-          <option value="">Minute</option>
-          {["00", "15", "30", "45"].map((m) => (
-            <option key={m} value={m}>
-              {m}
-            </option>
-          ))}
-        </select>
-
-        <select
-          className="w-20 appearance-none bg-white/10 text-white border border-white/40 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none [&>*]:text-black"
-          required
-        >
-          <option value="AM">AM</option>
-          <option value="PM">PM</option>
-        </select>
-      </div>
-      
-            <textarea
-              placeholder="Project Requirements / Message"
-              className="w-full bg-white/10 text-white placeholder-white/70 border border-white/40 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
-              rows={3}
-              required
-            ></textarea>
-            <button
-              type="submit"
-              className="w-full bg-sky-700/70 text-white py-2 rounded-md hover:bg-sky-800 transition font-medium"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-
-
-      
-    {/* 🌆 Featured Projects Section */}
+ {/* 🌆 Featured Projects Section */}
 <section className="relative w-full py-20 bg-gradient-to-b from-gray-900 via-sky-950 to-gray-900 text-white overflow-hidden">
   {/* Background Glow on Sides */}
   <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-sky-800/40 via-transparent to-transparent blur-3xl"></div>
   <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-sky-800/40 via-transparent to-transparent blur-3xl"></div>
 
   {/* Title */}
-  <h2 className="text-5xl font-extrabold text-center text-sky-100 mb-12 tracking-wide drop-shadow-[0_0_10px_rgba(56,189,248,0.4)]">
-    Featured Projects
-  </h2>
+  
 
   {/* Outer Frame */}
   <div className="relative mx-auto w-[92%] max-w-7xl h-[600px] rounded-3xl border-[3px] border-sky-700 bg-gradient-to-br from-sky-900/90 via-gray-900 to-sky-950 shadow-[0_0_80px_-10px_rgba(56,189,248,0.5)] overflow-hidden backdrop-blur-2xl">
@@ -384,6 +202,342 @@ export default function Home() {
     ))}
   </div>
 </section>
+
+
+
+
+{/* 🔹 Single Welcome Section with Buttons */}
+<section className="relative bg-white py-14 px-2 sm:px-4 md:px-6 lg:px-8">
+  <div className="relative max-w-[90vw] mx-auto bg-white border border-gray-200 rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 text-gray-800 text-center">
+    
+    {/* ✅ Combined Welcome Message */}
+    <h2 className="text-3xl font-bold text-sky-900 mb-2">
+      WELCOME TO AABHA NEXUS INNOVATIONS
+    </h2>
+    <h3 className="text-lg font-semibold text-sky-700 mb-4">
+      Your Trusted Partner in MEPF & ELV Solutions
+    </h3>
+
+    <p className="text-gray-700 text-[15px] leading-relaxed max-w-3xl mx-auto mb-8">
+      <b>Leading MEPF & ELV </b> engineering company offering design,
+      consulting,project execution, and lifecycle management with a strong focus on quality,innovation, and safety.
+      <br />
+      <br />
+    
+    </p>
+
+    {/* ✅ Buttons Below */}
+    <div className="flex flex-col sm:flex-row justify-center gap-4">
+  {/* Enquiry Button (Link) */}
+  <Link
+    href="/registration"
+    className="bg-sky-700 text-white px-6 py-2.5 rounded-md font-medium hover:bg-sky-800 transition"
+  >
+    Enquiry
+  </Link>
+
+  {/* Book Appointment Toggle (Button) */}
+  <button
+    onClick={() => setAppointmentOpen((prev) => !prev)}
+    className="bg-sky-50 text-sky-700 border border-sky-300 px-6 py-2.5 rounded-md font-medium hover:bg-sky-100 transition"
+  >
+    Book Appointment
+  </button>
+</div>
+
+{/* Appointment Form Section */}
+<div
+  className={`transition-all duration-500 overflow-hidden ${
+    appointmentOpen ? "max-h-[800px] mt-8" : "max-h-0"
+  }`}
+>
+  <form className="space-y-3 border-t border-gray-200 pt-6 mt-4 max-w-md mx-auto text-left">
+    <input
+      type="text"
+      placeholder="Full Name"
+      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
+      required
+    />
+    <input
+      type="email"
+      placeholder="Email Address"
+      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
+      required
+    />
+    <input
+      type="tel"
+      placeholder="Phone Number"
+      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
+      required
+    />
+    <input
+      type="date"
+      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm [color-scheme:light] focus:ring-2 focus:ring-sky-300 focus:outline-none"
+      required
+    />
+
+      <div className="flex gap-2">
+              <select
+                className="flex-1 border border-gray-300 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
+                required
+              >
+                <option value="">Hour</option>
+                {Array.from({ length: 12 }, (_, i) => (
+                  <option key={i + 1} value={i + 1}>
+                    {i + 1}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                className="flex-1 border border-gray-300 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
+                required
+              >
+                <option value="">Minute</option>
+                {["00", "15", "30", "45"].map((m) => (
+                  <option key={m} value={m}>
+                    {m}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                className="w-20 border border-gray-300 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
+                required
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
+
+    <textarea
+      placeholder="Project Requirements / Message"
+      className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-sky-300 focus:outline-none"
+      rows={3}
+      required
+    ></textarea>
+    <button
+      type="submit"
+      className="w-full bg-sky-700 text-white py-2 rounded-md hover:bg-sky-800 transition font-medium"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+
+</div>
+</section>
+
+
+{/* 🌟 Client Testimonials Section */}
+<section className="bg-white py-16 px-4 sm:px-6 lg:px-10">
+  <div className="max-w-6xl mx-auto text-center mb-12">
+    <h2 className="text-3xl font-bold text-sky-900 uppercase tracking-wider">
+      Client Testimonials
+    </h2>
+    <p className="text-gray-600 mt-2">
+      Hear what our valued clients have to say about their experience with Aabha Nexus Innovations.
+    </p>
+  </div>
+
+  {/* Cards Grid */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+    {[
+      {
+        text: "I had a wonderful experience at the construction site. The team maintained excellent safety standards and worked efficiently.",
+        name: "L BISWAS",
+        company: "INDUSTRIAL PROJECTS",
+      },
+      {
+        text: "I'm very pleased with the work done by Aabha Nexus Innovations. Professional and quick to respond, excellent quality.",
+        name: "KULDEEP SINGH",
+        company: "CIVITECH ENGINEERING",
+      },
+      {
+        text: "Excellent fire alarm installation! Highly reliable, clean work and great after-sales support.",
+        name: "PRIYANKA RANI",
+        company: "FIRE SAFE SOLUTIONS",
+      },
+      {
+        text: "Project delivered on time, best team support & professional execution.",
+        name: "VISHAL DHAMI",
+        company: "STRUCTURA BUILDERS",
+      },
+      {
+        text: "They are good at their services, on-time completion and professional behaviour towards clients.",
+        name: "JYOTI YADAV",
+        company: "RESIDENTIAL CLIENT",
+      },
+      {
+        text: "Well educated and have a great mindset for growth and goals.",
+        name: "KASHVI PAL",
+        company: "CLIENT",
+      },
+      {
+        text: "Excellent work, good service, responsive team. Project delivered on time.",
+        name: "PAWAN JAISAWAL",
+        company: "INDUSTRIAL PROJECTS",
+      },
+      {
+        text: "Nexus Innovations is a technology-led company bringing automation to construction.",
+        name: "ANKITA BHATTACHARYA",
+        company: "TECH CLIENT",
+      },
+      {
+        text: "Best service & responsive team, project delivered on time.",
+        name: "ZEESHAN KHAN",
+        company: "COMMERCIAL CLIENT",
+      },
+      {
+        text: "They offer excellent service and always deliver on time.",
+        name: "SAKSHI SINGH",
+        company: "CLIENT",
+      },
+      {
+        text: "Thank you for all your good deeds you have done.",
+        name: "HEMA YADAV",
+        company: "CLIENT",
+      },
+      {
+        text: "Good professional team and timely delivery.",
+        name: "SUMAN",
+        company: "CLIENT",
+        
+      },
+      { text: "Best service and great experience overall.",
+        name: "SHARATH AN",
+        company: "CLIENT",
+        
+      },
+      {
+        text: "Nice service and supportive team.",
+        name: "POONAM SING",
+        company: "CLIENT",
+      },
+      {
+        text: "Very good services.",
+        name: "SIRAJUL HASAN",
+        company: "CLIENT",
+      },
+      {
+        text: "Good work and professional behaviour.",
+        name: "AMIT KUMAR",
+        company: "CLIENT",
+      },
+      {
+        text: "Good work.",
+        name: "RAGHVENDRA PRATAP SINGH",
+        company: "CLIENT",
+      },
+      {
+        text: "Excellent service.",
+        name: "MAYANK KUMAR",
+        company: "CLIENT",
+      },
+      {
+        text: "Excellent 👍",
+        name: "NEETU SHARMA",
+        company: "CLIENT",
+      },
+      {
+        text: "Best works!",
+        name: "SADDAM HUSSAIN",
+        company: "CLIENT",
+      },
+    ].map((review, i) => {
+      const isYellow = i % 2 !== 0;
+      return (
+        <div key={i} className="flex flex-col items-center text-center">
+          {/* Card */}
+          <div
+            className={`${isYellow ? "bg-yellow-400" : "bg-gray-100"} relative p-6 rounded-md shadow-sm hover:shadow-md transition-shadow`}
+          >
+            <div className="flex items-start mb-3">
+              <span className={`text-3xl font-bold ${isYellow ? "text-yellow-700" : "text-gray-400"}`}>&ldquo;</span>
+            </div>
+            <p className="text-sm text-gray-700 leading-relaxed">{review.text}</p>
+
+            {/* Arrow */}
+            <div
+              className={`absolute left-1/2 -bottom-3 w-0 h-0 border-l-[10px] border-r-[10px] border-t-[10px] ${
+                isYellow ? "border-t-yellow-400" : "border-t-gray-100"
+              } border-l-transparent border-r-transparent transform -translate-x-1/2`}
+            ></div>
+          </div>
+
+          {/* Reviewer Info */}
+          <div className="mt-6">
+            <h4 className="text-sm font-bold text-sky-900 uppercase">{review.name}</h4>
+            <p className="text-xs text-gray-600 uppercase">{review.company}</p>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>
+
+
+
+
+{/* 💬 Contact / Project Requirement Section */}
+<section className="bg-gradient-to-b from-sky-50 to-sky-100 py-20 px-6 lg:px-16">
+  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    {/* Left Side - Text */}
+    <div>
+      <h2 className="text-3xl md:text-4xl font-bold text-sky-900 mb-4 leading-snug">
+        Have a Project Requirement? <br /> <span className="text-sky-700">Get in Touch</span>
+      </h2>
+      <p className="text-gray-700 text-sm md:text-base leading-relaxed max-w-md">
+        We’d love to discuss how Aabha Nexus Innovations can help make your next
+        project a success. Fill out the form and our team will connect with you shortly.
+      </p>
+    </div>
+
+    {/* Right Side - Contact Form */}
+    <div className="bg-white shadow-xl border border-sky-100 rounded-xl p-8">
+      <form className="space-y-5">
+        <div>
+          <label className="block text-sm font-semibold text-sky-900 mb-2">Full Name</label>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-sky-400"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-sky-900 mb-2">Email Address</label>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-sky-400"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-sky-900 mb-2">Message</label>
+          <textarea
+            rows={4}
+            placeholder="Write your message here..."
+            className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-sky-400 resize-none"
+            required
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-sky-700 text-white font-semibold py-2.5 rounded-md hover:bg-sky-800 transition"
+        >
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
 
 
      

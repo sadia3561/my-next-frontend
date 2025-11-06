@@ -43,10 +43,11 @@ export default function PartnerRegistration() {
   });
 
   const [otpSent, setOtpSent] = useState(false);
-  const [otp, setOtp] = useState("");
   const [enteredOtp, setEnteredOtp] = useState("");
   const [otpVerified, setOtpVerified] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  // 🔹 Handle input changes
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -57,36 +58,101 @@ export default function PartnerRegistration() {
     }));
   };
 
-  const handleSendOtp = () => {
+  // 🔹 Send OTP via backend Twilio service
+  const handleSendOtp = async () => {
     if (!formData.phone || formData.phone.length < 10) {
       alert("Please enter a valid mobile number first.");
       return;
     }
-    const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
-    setOtp(generatedOtp);
-    setOtpSent(true);
-    setOtpVerified(false);
-    alert(`OTP sent to ${formData.phone}: ${generatedOtp}`); // demo
-  };
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:3000/auth/send-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: formData.phone }),
+      });
 
-  const handleVerifyOtp = () => {
-    if (enteredOtp === otp) {
-      setOtpVerified(true);
-      alert("✅ Mobile number verified successfully!");
-    } else {
-      alert("❌ Invalid OTP. Please try again.");
+      const data = await res.json();
+      if (data.success) {
+        setOtpSent(true);
+        alert("✅ OTP sent successfully!");
+      } else {
+        alert("❌ Failed to send OTP: " + data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error sending OTP. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!otpVerified) {
-      alert("Please verify your mobile number before submitting.");
+  // 🔹 Verify OTP
+  const handleVerifyOtp = async () => {
+    if (!enteredOtp) {
+      alert("Please enter the OTP.");
       return;
     }
-    alert("Form submitted successfully!");
-    console.log(formData);
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:3000/auth/verify-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: formData.phone, code: enteredOtp }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setOtpVerified(true);
+        alert("✅ Mobile number verified successfully!");
+      } else {
+        alert("❌ Invalid OTP. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error verifying OTP. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  // 🔹 Submit final registration
+const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  if (!otpVerified) {
+    alert("Please verify your mobile number before submitting.");
+    return;
+  }
+
+  const formDataToSend = new FormData();
+  Object.entries(formData).forEach(([key, value]) => {
+    if (value !== null) {
+      formDataToSend.append(key, value as any);
+    }
+  });
+
+  try {
+    const res = await fetch("http://localhost:3000/auth/register-org", {
+      method: "POST",
+      body: formDataToSend,
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("✅ Registration submitted successfully! Waiting for admin approval.");
+      console.log("Server response:", data);
+      setStep(1);
+    } else {
+      alert("❌ Error submitting form: " + data.message);
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error submitting form. Please try again.");
+  }
+};
+
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
@@ -242,6 +308,7 @@ export default function PartnerRegistration() {
                         Verify
                       </button>
                     </div>
+                    
                   )}
 
                   {otpVerified && (
@@ -272,11 +339,15 @@ export default function PartnerRegistration() {
                   Back
                 </button>
                 <button
-                  type="button"
-                  onClick={nextStep}
-                  className="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800"
+                  type="submit"
+                  disabled={!otpVerified}
+    className={`px-4 py-2 rounded text-white font-medium transition ${
+      otpVerified
+        ? "bg-green-700 hover:bg-green-800"
+        : "bg-gray-400 cursor-not-allowed"
+    }`}
                 >
-                  Next
+                  {otpVerified ? "Submit Registration" : "Verify OTP to Submit"}
                 </button>
               </div>
             </div>

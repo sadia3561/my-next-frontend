@@ -10,7 +10,8 @@ export default function Navbar() {
   const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
 
   return (
-    <nav className="bg-blue-900 text-white p-4 flex justify-between items-center relative z-[999] shadow-lg">
+   <nav className="fixed top-0 left-0 w-full bg-blue-900 text-white p-4 flex justify-between items-center z-[999] shadow-lg">
+
       {/* Left Section with Logo + Title */}
       <div className="flex items-center space-x-3">
         <div className="w-16 h-16 bg-white rounded-md overflow-hidden flex items-center justify-center shadow-md border-2 border-yellow-400">
@@ -22,9 +23,7 @@ export default function Navbar() {
             className="object-contain"
           />
         </div>
-        <div className="text-xl font-bold tracking-wide">
-          ANI <span className="text-yellow-300">MEPF & ELV</span>
-        </div>
+      
       </div>
 
       {/* Desktop Menu */}
@@ -54,6 +53,7 @@ export default function Navbar() {
           {servicesDropdownOpen && (
             <ul className="absolute top-full left-0 mt-2 w-56 bg-gradient-to-b from-blue-800 to-blue-950 border border-yellow-400 text-white rounded-md shadow-[0_4px_15px_rgba(0,0,0,0.4)] z-[9999] overflow-hidden">
               {[
+                ["CoreServices", "/services/coreservices"],
                 ["Tender", "/services/tender"],
                 ["Project Design", "/services/project-design"],
                 ["Project Consultant", "/services/project-consultant"],
