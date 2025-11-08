@@ -66,7 +66,7 @@ export default function PartnerRegistration() {
     }
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/auth/send-otp", {
+      const res = await fetch("http://localhost:4000/auth/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: formData.phone }),
@@ -95,7 +95,7 @@ export default function PartnerRegistration() {
     }
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/auth/verify-otp", {
+      const res = await fetch("http://localhost:4000/auth/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: formData.phone, code: enteredOtp }),
@@ -133,7 +133,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
   });
 
   try {
-    const res = await fetch("http://localhost:3000/auth/register-org", {
+    const res = await fetch("http://localhost:4000/auth/register-org", {
       method: "POST",
       body: formDataToSend,
     });

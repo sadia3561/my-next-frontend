@@ -1,11 +1,14 @@
 "use client";
-
+import React from "react";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { LogIn, MessageSquare, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
+  
+
+
   const [loginOpen, setLoginOpen] = useState(false);
   const [showRoles, setShowRoles] = useState(false);
   const [appointmentOpen, setAppointmentOpen] = useState(false);
@@ -62,15 +65,22 @@ export default function Home() {
     
     <main className="min-h-screen bg-gradient-to-b from-sky-50 via-sky-100 to-blue-100 text-gray-900 font-sans">
       {/* Header */}
-      <div className="pt-24"></div>
-      <header className="flex justify-between items-center px-10 py-4 bg-white shadow border-b border-gray-200">
-        <div className="flex items-center gap-3">
-          <img src="/logoo.png" alt="Logo" className="w-12 h-12" />
-          <h1 className="text-2xl font-semibold text-sky-900 tracking-wide">
-            Aabha Nexus Innovation
-          </h1>
-        </div>
+<div className="pt-24"></div>
+<header className="flex justify-between items-center px-10 py-4 bg-white shadow border-b border-gray-200">
+  <div className="flex items-center gap-4">
+    {/* Logo */}
+    <img src="/logoo.png" alt="Logo" className="w-12 h-12" />
 
+    {/* Company Name + Tagline (stacked vertically) */}
+    <div className="flex flex-col">
+      <h1 className="text-2xl font-semibold text-sky-900 tracking-wide">
+        Aabha Global Nexus Innovation
+      </h1>
+      <p className="text-sm text-gray-600 italic mt-1">
+        Innovating the Future. Connecting the World.
+      </p>
+    </div>
+    </div>
         {/* Login */}
         
         <div className="relative" ref={loginRef}>
@@ -140,11 +150,9 @@ export default function Home() {
         "/assets/featured3.jpg",
         "/assets/featured4.jpg",
         "/assets/featured5.jpg",
-        "/assets/ser8.jpg",
-        "/assets/ser9.jpg",
-        "/assets/ser10.jpg",
+     
       ].map((src, i) => {
-        const indexDiff = (i - current + 6) % 6;
+        const indexDiff = (i - current + 5) % 5;
         let className =
           "absolute rounded-2xl shadow-[0_0_40px_rgba(56,189,248,0.4)] border border-sky-400/30 transition-all duration-700 ease-in-out object-cover object-center";
 
@@ -329,9 +337,11 @@ export default function Home() {
 </section>
 
 
-{/* 🌟 Client Testimonials Section */}
-<section className="bg-white py-16 px-4 sm:px-6 lg:px-10">
-  <div className="max-w-6xl mx-auto text-center mb-12">
+
+
+{/* 💬 Client Testimonials Section — Always 4 Cards Full Width */}
+<section className="relative w-screen overflow-hidden bg-white py-16">
+  <div className="text-center mb-12">
     <h2 className="text-3xl font-bold text-sky-900 uppercase tracking-wider">
       Client Testimonials
     </h2>
@@ -340,141 +350,110 @@ export default function Home() {
     </p>
   </div>
 
-  {/* Cards Grid */}
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-    {[
-      {
-        text: "I had a wonderful experience at the construction site. The team maintained excellent safety standards and worked efficiently.",
-        name: "L BISWAS",
-        company: "INDUSTRIAL PROJECTS",
-      },
-      {
-        text: "I'm very pleased with the work done by Aabha Nexus Innovations. Professional and quick to respond, excellent quality.",
-        name: "KULDEEP SINGH",
-        company: "CIVITECH ENGINEERING",
-      },
-      {
-        text: "Excellent fire alarm installation! Highly reliable, clean work and great after-sales support.",
-        name: "PRIYANKA RANI",
-        company: "FIRE SAFE SOLUTIONS",
-      },
-      {
-        text: "Project delivered on time, best team support & professional execution.",
-        name: "VISHAL DHAMI",
-        company: "STRUCTURA BUILDERS",
-      },
-      {
-        text: "They are good at their services, on-time completion and professional behaviour towards clients.",
-        name: "JYOTI YADAV",
-        company: "RESIDENTIAL CLIENT",
-      },
-      {
-        text: "Well educated and have a great mindset for growth and goals.",
-        name: "KASHVI PAL",
-        company: "CLIENT",
-      },
-      {
-        text: "Excellent work, good service, responsive team. Project delivered on time.",
-        name: "PAWAN JAISAWAL",
-        company: "INDUSTRIAL PROJECTS",
-      },
-      {
-        text: "Nexus Innovations is a technology-led company bringing automation to construction.",
-        name: "ANKITA BHATTACHARYA",
-        company: "TECH CLIENT",
-      },
-      {
-        text: "Best service & responsive team, project delivered on time.",
-        name: "ZEESHAN KHAN",
-        company: "COMMERCIAL CLIENT",
-      },
-      {
-        text: "They offer excellent service and always deliver on time.",
-        name: "SAKSHI SINGH",
-        company: "CLIENT",
-      },
-      {
-        text: "Thank you for all your good deeds you have done.",
-        name: "HEMA YADAV",
-        company: "CLIENT",
-      },
-      {
-        text: "Good professional team and timely delivery.",
-        name: "SUMAN",
-        company: "CLIENT",
-        
-      },
-      { text: "Best service and great experience overall.",
-        name: "SHARATH AN",
-        company: "CLIENT",
-        
-      },
-      {
-        text: "Nice service and supportive team.",
-        name: "POONAM SING",
-        company: "CLIENT",
-      },
-      {
-        text: "Very good services.",
-        name: "SIRAJUL HASAN",
-        company: "CLIENT",
-      },
-      {
-        text: "Good work and professional behaviour.",
-        name: "AMIT KUMAR",
-        company: "CLIENT",
-      },
-      {
-        text: "Good work.",
-        name: "RAGHVENDRA PRATAP SINGH",
-        company: "CLIENT",
-      },
-      {
-        text: "Excellent service.",
-        name: "MAYANK KUMAR",
-        company: "CLIENT",
-      },
-      {
-        text: "Excellent 👍",
-        name: "NEETU SHARMA",
-        company: "CLIENT",
-      },
-      {
-        text: "Best works!",
-        name: "SADDAM HUSSAIN",
-        company: "CLIENT",
-      },
-    ].map((review, i) => {
-      const isYellow = i % 2 !== 0;
-      return (
-        <div key={i} className="flex flex-col items-center text-center">
-          {/* Card */}
-          <div
-            className={`${isYellow ? "bg-yellow-400" : "bg-gray-100"} relative p-6 rounded-md shadow-sm hover:shadow-md transition-shadow`}
-          >
-            <div className="flex items-start mb-3">
-              <span className={`text-3xl font-bold ${isYellow ? "text-yellow-700" : "text-gray-400"}`}>&ldquo;</span>
+  {(() => {
+    const reviews = [
+     { text: "I had a wonderful experience at the construction site. The team maintained excellent safety standards and worked efficiently.", name: "L BISWAS", company: "INDUSTRIAL PROJECTS" },
+      { text: "I'm very pleased with the work done by Aabha Nexus Innovations. Professional and quick to respond, excellent quality.", name: "KULDEEP SINGH", company: "CIVITECH ENGINEERING" },
+       { text: "Excellent fire alarm installation! Highly reliable, clean work and great after-sales support.", name: "PRIYANKA RANI", company: "FIRE SAFE SOLUTIONS" }, 
+       { text: "Project delivered on time, best team support & professional execution.", name: "VISHAL DHAMI", company: "STRUCTURA BUILDERS" }, 
+       { text: "They are good at their services, on-time completion and professional behaviour towards clients.", name: "JYOTI YADAV", company: "RESIDENTIAL CLIENT" }, 
+       { text: "Well educated and have a great mindset for growth and goals.", name: "KASHVI PAL", company: "CLIENT" }, 
+       { text: "Excellent work, good service, responsive team. Project delivered on time.", name: "PAWAN JAISAWAL", company: "INDUSTRIAL PROJECTS" }, 
+       { text: "Nexus Innovations is a technology-led company bringing automation to construction.", name: "ANKITA BHATTACHARYA", company: "TECH CLIENT" },
+        { text: "Best service & responsive team, project delivered on time.", name: "ZEESHAN KHAN", company: "COMMERCIAL CLIENT" }, 
+        { text: "They offer excellent service and always deliver on time.", name: "SAKSHI SINGH", company: "CLIENT" },
+         { text: "Thank you for all your good deeds you have done.", name: "HEMA YADAV", company: "CLIENT" }, 
+         { text: "Good professional team and timely delivery.", name: "SUMAN", company: "CLIENT" },
+          { text: "Best service and great experience overall.", name: "SHARATH AN", company: "CLIENT" }, 
+          { text: "Nice service and supportive team.", name: "POONAM SING", company: "CLIENT" },
+           { text: "Very good services.", name: "SIRAJUL HASAN", company: "CLIENT" }, 
+           { text: "Good work and professional behaviour.", name: "AMIT KUMAR", company: "CLIENT" }, 
+           { text: "Good work.", name: "RAGHVENDRA PRATAP SINGH", company: "CLIENT" },
+            { text: "Excellent service.", name: "MAYANK KUMAR", company: "CLIENT" },
+             { text: "Excellent 👍", name: "NEETU SHARMA", company: "CLIENT" },
+              { text: "Best works!", name: "SADDAM HUSSAIN", company: "CLIENT" },
+    ];
+
+    const [currentGroup, setCurrentGroup] = React.useState(0);
+    const groupsCount = Math.ceil(reviews.length / 4);
+
+    const goPrevTestimonials = () => {
+      setCurrentGroup((prev) => (prev === 0 ? groupsCount - 1 : prev - 1));
+    };
+
+    const goNextTestimonials = () => {
+      setCurrentGroup((prev) => (prev === groupsCount - 1 ? 0 : prev + 1));
+    };
+
+    return (
+      <div className="relative w-full overflow-hidden">
+        {/* Slider */}
+        <div
+          className="flex transition-transform duration-700 ease-in-out"
+          style={{
+            transform: `translateX(-${currentGroup * 100}%)`,
+            width: `${groupsCount * 100}%`,
+          }}
+        >
+          {Array.from({ length: groupsCount }).map((_, groupIndex) => (
+            <div key={groupIndex} className="flex w-full flex-shrink-0">
+              {reviews.slice(groupIndex * 4, groupIndex * 4 + 4).map((review, i) => {
+                const isYellow = (groupIndex * 4 + i) % 2 !== 0;
+                return (
+                  <div
+                    key={i}
+                    className="w-[25vw] flex flex-col items-center text-center px-6"
+                  >
+                    <div
+                      className={`${
+                        isYellow ? "bg-yellow-400" : "bg-gray-100"
+                      } relative p-6 rounded-md shadow-md hover:shadow-lg transition-all duration-500`}
+                    >
+                      <div className="flex items-start mb-3">
+                        <span
+                          className={`text-3xl font-bold ${
+                            isYellow ? "text-yellow-700" : "text-gray-400"
+                          }`}
+                        >
+                          &ldquo;
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-700 leading-relaxed">{review.text}</p>
+                      <div
+                        className={`absolute left-1/2 -bottom-3 w-0 h-0 border-l-[10px] border-r-[10px] border-t-[10px] ${
+                          isYellow ? "border-t-yellow-400" : "border-t-gray-100"
+                        } border-l-transparent border-r-transparent transform -translate-x-1/2`}
+                      ></div>
+                    </div>
+                    <div className="mt-6">
+                      <h4 className="text-sm font-bold text-sky-900 uppercase">{review.name}</h4>
+                      <p className="text-xs text-gray-600 uppercase">{review.company}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <p className="text-sm text-gray-700 leading-relaxed">{review.text}</p>
-
-            {/* Arrow */}
-            <div
-              className={`absolute left-1/2 -bottom-3 w-0 h-0 border-l-[10px] border-r-[10px] border-t-[10px] ${
-                isYellow ? "border-t-yellow-400" : "border-t-gray-100"
-              } border-l-transparent border-r-transparent transform -translate-x-1/2`}
-            ></div>
-          </div>
-
-          {/* Reviewer Info */}
-          <div className="mt-6">
-            <h4 className="text-sm font-bold text-sky-900 uppercase">{review.name}</h4>
-            <p className="text-xs text-gray-600 uppercase">{review.company}</p>
-          </div>
+          ))}
         </div>
-      );
-    })}
-  </div>
+
+        {/* Navigation Buttons */}
+        <button
+          onClick={goPrevTestimonials}
+          className="absolute top-1/2 left-4 -translate-y-1/2 p-3 bg-sky-900 text-white rounded-full hover:bg-sky-700 z-10"
+        >
+          ‹
+        </button>
+        <button
+          onClick={goNextTestimonials}
+          className="absolute top-1/2 right-4 -translate-y-1/2 p-3 bg-sky-900 text-white rounded-full hover:bg-sky-700 z-10"
+        >
+          ›
+        </button>
+      </div>
+    );
+  })()}
 </section>
+
 
 
 

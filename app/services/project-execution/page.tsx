@@ -14,16 +14,7 @@ export default function ProjectExecutionPage() {
 
       </p>
 
-      {/* Full-size Image */}
-            <div className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-lg">
-              <Image
-                src="/assets/ser16.jpg"
-                alt="Project Design and Engineering"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
+     
       
             {/* Optional caption or second image */}
             <p className="mt-6 text-gray-600">

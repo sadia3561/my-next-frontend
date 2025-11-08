@@ -97,17 +97,8 @@ export default function ProjectConsultant() {
           className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(${-index * 100}%)` }}
         >
-          {IMAGES.map((src, i) => (
-            <div key={i} className="relative flex-shrink-0 w-full h-[500px]">
-              <Image
-                src={src}
-                alt={`Project Consulting Image ${i + 1}`}
-                fill
-                className="object-cover"
-                priority={i === index}
-              />
-            </div>
-          ))}
+       
+          
         </div>
 
         {/* Prev/Next Buttons */}
