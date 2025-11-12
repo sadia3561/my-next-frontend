@@ -43,7 +43,7 @@ export default function Home() {
     e.preventDefault();
     setMessage("");
     try {
-      const res = await fetch("http://localhost:4000/api/auth/login", {
+      const res = await fetch("https://my-next-backend-production.up.railway.app/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -516,6 +516,60 @@ export default function Home() {
   </div>
 </section>
 
+{/* 🏢 Partner Companies / Clients Logo Section */}
+<section className="bg-white py-16 px-6 lg:px-12 border-t border-gray-200">
+  <div className="text-center mb-10">
+    <h2 className="text-3xl font-bold text-sky-900 uppercase tracking-wide">
+      Our Clients & Partners
+    </h2>
+    <p className="text-gray-600 mt-2">
+      Trusted by leading companies and organizations across industries.
+    </p>
+  </div>
+
+  {/* Logos Grid */}
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center justify-center">
+    {[
+      "/assets/logo1.jpg",
+      "/assets/logo2.jpg",
+      "/assets/logo3.jpg",
+      "/assets/logo4.jpg",
+      "/assets/logo5.jpg",
+      "/assets/logo6.jpg",
+      "/assets/logo7.jpg",
+      "/assets/logo8.jpg",
+      "/assets/logo9.jpg",
+      "/assets/logo10.jpg",
+      "/assets/logo11.jpg",
+      "/assets/logo12.jpg",
+      "/assets/logo13.jpg",
+      "/assets/logo14.jpg",
+      "/assets/logo15.jpg",
+      "/assets/logo16.jpg",
+      "/assets/logo17.jpg",
+      "/assets/logo18.jpg",
+      "/assets/logo19.jpg",
+      "/assets/logo20.jpg",
+      "/assets/logo21.jpg",
+      "/assets/logo22.jpg",
+      "/assets/logo23.jpg",
+      "/assets/logo24.jpg",
+      "/assets/logo25.jpg",
+      "/assets/logo26.jpg",
+    ].map((src, i) => (
+      <div
+        key={i}
+        className="flex items-center justify-center bg-gray-50 hover:bg-gray-100 transition rounded-xl shadow-sm p-4"
+      >
+        <img
+          src={src}
+          alt={`Company ${i + 1}`}
+          className="w-32 h-20 object-contain transition duration-300"
+        />
+      </div>
+    ))}
+  </div>
+</section>
 
 
 

@@ -21,7 +21,7 @@ export default function ProfilePage() {
 <p>You are logged in as <strong>{storedRole}</strong></p>
 
 
-        const res = await fetch("https://my-next-backend-20.onrender.com/api/auth/profile", {
+        const res = await fetch("https://my-next-backend-production.up.railway.app/api/auth/profile", {
           method: "GET", // explicitly define GET
           headers: {
             "Content-Type": "application/json", // necessary for backend parsing

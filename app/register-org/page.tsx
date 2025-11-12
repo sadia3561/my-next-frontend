@@ -1,6 +1,11 @@
 "use client";
 
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { auth } from "@/lib/firebaseConfig";
+import { sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
+
+
+
 
 interface FormData {
   orgName: string;
@@ -20,6 +25,8 @@ interface FormData {
   confirmPassword: string;
   description?: string;
 }
+
+
 
 export default function PartnerRegistration() {
   const [step, setStep] = useState(1);
@@ -42,12 +49,16 @@ export default function PartnerRegistration() {
     description: "",
   });
 
-  const [otpSent, setOtpSent] = useState(false);
-  const [enteredOtp, setEnteredOtp] = useState("");
-  const [otpVerified, setOtpVerified] = useState(false);
-  const [loading, setLoading] = useState(false);
+ const [emailSent, setEmailSent] = useState(false);     // Email verification link bhejne ke liye
+const [emailVerified, setEmailVerified] = useState(false); // Email verify hone ke baad true hoga
+const [loading, setLoading] = useState(false);         // Loading indicator ke liye
 
-  // 🔹 Handle input changes
+
+
+ 
+
+ 
+  // ---------------- HANDLE INPUT CHANGE ----------------
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -58,107 +69,96 @@ export default function PartnerRegistration() {
     }));
   };
 
-  // 🔹 Send OTP via backend Twilio service
-  const handleSendOtp = async () => {
-    if (!formData.phone || formData.phone.length < 10) {
-      alert("Please enter a valid mobile number first.");
+  // Send email verification
+  const handleSendEmailVerification = async () => {
+    if (!formData.email) {
+      alert("Please enter your email first.");
       return;
     }
+
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:4000/auth/send-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: formData.phone }),
-      });
+      const tempPassword = Math.random().toString(36).slice(-8); // temporary password
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        tempPassword
+      );
 
-      const data = await res.json();
-      if (data.success) {
-        setOtpSent(true);
-        alert("✅ OTP sent successfully!");
-      } else {
-        alert("❌ Failed to send OTP: " + data.message);
-      }
-    } catch (error) {
+      await sendEmailVerification(userCredential.user);
+      setEmailSent(true);
+      alert(`✅ Verification email sent to ${formData.email}. Please check your inbox.`);
+    } catch (error: any) {
       console.error(error);
-      alert("Error sending OTP. Please try again.");
+      alert(`❌ Error sending verification email: ${error.message}`);
     } finally {
       setLoading(false);
     }
   };
 
-  // 🔹 Verify OTP
-  const handleVerifyOtp = async () => {
-    if (!enteredOtp) {
-      alert("Please enter the OTP.");
-      return;
-    }
-    setLoading(true);
+  // Verify email
+  const handleVerifyEmail = async () => {
     try {
-      const res = await fetch("http://localhost:4000/auth/verify-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: formData.phone, code: enteredOtp }),
-      });
-      const data = await res.json();
-
-      if (data.success) {
-        setOtpVerified(true);
-        alert("✅ Mobile number verified successfully!");
-      } else {
-        alert("❌ Invalid OTP. Please try again.");
+      const user = auth.currentUser;
+      if (!user) {
+        alert("No user found. Please request verification email again.");
+        return;
       }
-    } catch (error) {
+
+      await user.reload();
+      if (user.emailVerified) {
+        setEmailVerified(true);
+        alert("✅ Email verified successfully!");
+      } else {
+        alert("⚠️ Email not verified yet. Please check your inbox.");
+      }
+    } catch (error: any) {
       console.error(error);
-      alert("Error verifying OTP. Please try again.");
-    } finally {
-      setLoading(false);
+      alert("❌ Error verifying email: " + error.message);
     }
   };
 
-  // 🔹 Submit final registration
-const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  if (!otpVerified) {
-    alert("Please verify your mobile number before submitting.");
-    return;
-  }
-
-  const formDataToSend = new FormData();
-  Object.entries(formData).forEach(([key, value]) => {
-    if (value !== null) {
-      formDataToSend.append(key, value as any);
+    if (!emailVerified) {
+      alert("Please verify your email before submitting.");
+      return;
     }
-  });
 
-  try {
-    const res = await fetch("http://localhost:4000/auth/register-org", {
-      method: "POST",
-      body: formDataToSend,
+    const formDataToSend = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value !== null) formDataToSend.append(key, value as any);
     });
 
-    const data = await res.json();
+    try {
+      const res = await fetch("https://my-next-backend-production.up.railway.app/auth/register-org", {
+        method: "POST",
+        body: formDataToSend,
+      });
 
-    if (res.ok) {
-      alert("✅ Registration submitted successfully! Waiting for admin approval.");
-      console.log("Server response:", data);
-      setStep(1);
-    } else {
-      alert("❌ Error submitting form: " + data.message);
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("✅ Registration submitted successfully! Waiting for admin approval.");
+        console.log("Server response:", data);
+        setStep(1);
+      } else {
+        alert("❌ Error submitting form: " + data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error submitting form. Please try again.");
     }
-  } catch (error) {
-    console.error(error);
-    alert("Error submitting form. Please try again.");
-  }
-};
-
+  };
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
 
   return (
+    
     <div className="min-h-screen bg-gray-100 py-10 px-6">
+      <div className="pt-24"></div>
   <div className="w-full bg-white border border-gray-300 rounded-none shadow-sm p-10 text-sm">
         <h2 className="text-center text-lg font-semibold text-blue-900 mb-6 tracking-wide uppercase border-b pb-2">
   Partner Registration Portal
@@ -253,70 +253,65 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
                   />
                 </div>
                 <div>
-                  <label className="block mb-1">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-2 rounded w-full"
-                    required
-                  />
-                </div>
+  <label className="block mb-1">Mobile Number</label>
+  <input
+    type="tel"
+    name="phone"
+    value={formData.phone}
+    onChange={handleChange}
+    placeholder="Enter mobile number"
+    className="border border-gray-300 p-2 rounded w-full"
+    
+  />
+</div>
 
-                {/* Phone + OTP */}
-                <div className="md:col-span-2">
-                  <label className="block mb-1">Mobile Number</label>
-                  <div className="flex gap-2">
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="Enter mobile number"
-                      className="border border-gray-300 p-2 rounded w-full"
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={handleSendOtp}
-                      disabled={otpSent}
-                      className={`${
-                        otpSent
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : "bg-blue-700 hover:bg-blue-800"
-                      } text-white px-3 py-2 rounded`}
-                    >
-                      {otpSent ? "OTP Sent" : "Send OTP"}
-                    </button>
-                  </div>
 
-                  {otpSent && !otpVerified && (
-                    <div className="flex gap-2 mt-2">
-                      <input
-                        type="text"
-                        placeholder="Enter OTP"
-                        value={enteredOtp}
-                        onChange={(e) => setEnteredOtp(e.target.value)}
-                        className="border border-gray-300 p-2 rounded w-full"
-                      />
-                      <button
-                        type="button"
-                        onClick={handleVerifyOtp}
-                        className="bg-green-700 text-white px-3 py-2 rounded hover:bg-green-800"
-                      >
-                        Verify
-                      </button>
-                    </div>
-                    
-                  )}
+                {/* Email + Verification */}
+<div className="md:col-span-2">
+  <label className="block mb-1">Email</label>
+  <div className="flex gap-2">
+    <input
+      type="email"
+      name="email"
+      value={formData.email}
+      onChange={handleChange}
+      placeholder="Enter email address"
+      className="border border-gray-300 p-2 rounded w-full"
+      required
+    />
 
-                  {otpVerified && (
-                    <p className="text-green-700 text-xs mt-1">
-                      ✅ Mobile number verified successfully!
-                    </p>
-                  )}
-                </div>
+    <button
+      type="button"
+      onClick={handleSendEmailVerification}
+      disabled={emailSent}
+      className={`${
+        emailSent
+          ? "bg-gray-400 cursor-not-allowed"
+          : "bg-blue-700 hover:bg-blue-800"
+      } text-white px-3 py-2 rounded`}
+    >
+      {emailSent ? "Verification Sent" : "Send Verification Email"}
+    </button>
+  </div>
+
+  {emailSent && !emailVerified && (
+    <div className="flex gap-2 mt-2">
+      <button
+        type="button"
+        onClick={handleVerifyEmail}
+        className="bg-green-700 text-white px-3 py-2 rounded hover:bg-green-800"
+      >
+        Verify Email
+      </button>
+    </div>
+  )}
+
+  {emailVerified && (
+    <p className="text-green-700 text-xs mt-1">
+      ✅ Email verified successfully!
+    </p>
+  )}
+</div>
 
                 <div className="md:col-span-2">
                   <label className="block mb-1">Website (Optional)</label>
@@ -336,20 +331,18 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
                   onClick={prevStep}
                   className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
                 >
-                  Back
-                </button>
-                <button
-                  type="submit"
-                  disabled={!otpVerified}
-    className={`px-4 py-2 rounded text-white font-medium transition ${
-      otpVerified
-        ? "bg-green-700 hover:bg-green-800"
-        : "bg-gray-400 cursor-not-allowed"
-    }`}
-                >
-                  {otpVerified ? "Submit Registration" : "Verify OTP to Submit"}
-                </button>
-              </div>
+                 Back
+  </button>
+  {emailVerified && (
+    <button
+      type="button"
+      onClick={nextStep} // just move to next step
+      className="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800"
+    >
+      Next
+    </button>
+  )}
+</div>
             </div>
           )}
 
