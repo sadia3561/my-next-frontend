@@ -556,6 +556,13 @@ export default function Home() {
       "/assets/logo24.jpg",
       "/assets/logo25.jpg",
       "/assets/logo26.jpg",
+      "/assets/logo27.jpg",
+      "/assets/logo28.jpg",
+      "/assets/logo29.jpg",
+      "/assets/logo30.jpg",
+      "/assets/logo31.jpg",
+      "/assets/logo32.jpg",
+
     ].map((src, i) => (
       <div
         key={i}
@@ -574,6 +581,106 @@ export default function Home() {
 
 
      
+
+
+
+<section className="bg-white py-16 px-6 lg:px-12 border-t border-gray-200 relative">
+  <div className="text-center mb-10">
+    <h2 className="text-3xl font-bold text-sky-900 uppercase tracking-wide">
+      Our Clients & Partners
+    </h2>
+    <p className="text-gray-600 mt-2">
+      Trusted by leading companies and organizations across industries.
+    </p>
+  </div>
+
+  {(() => {
+    const logos = [
+      "/assets/logo1.jpg", "/assets/logo2.jpg", "/assets/logo3.jpg", "/assets/logo4.jpg",
+      "/assets/logo5.jpg", "/assets/logo6.jpg", "/assets/logo7.jpg", "/assets/logo8.jpg",
+      "/assets/logo9.jpg", "/assets/logo10.jpg", "/assets/logo11.jpg", "/assets/logo12.jpg",
+      "/assets/logo13.jpg", "/assets/logo14.jpg", "/assets/logo15.jpg", "/assets/logo16.jpg",
+      "/assets/logo17.jpg", "/assets/logo18.jpg", "/assets/logo19.jpg", "/assets/logo20.jpg",
+      "/assets/logo21.jpg", "/assets/logo22.jpg", "/assets/logo23.jpg", "/assets/logo24.jpg",
+      "/assets/logo25.jpg", "/assets/logo26.jpg", "/assets/logo27.jpg", "/assets/logo28.jpg",
+      "/assets/logo29.jpg", "/assets/logo30.jpg", "/assets/logo31.jpg", "/assets/logo32.jpg",
+    ];
+
+    const [current, setCurrent] = React.useState(0);
+    const groupSize = 8;
+    const totalGroups = Math.ceil(logos.length / groupSize);
+
+    const nextSlide = () => setCurrent((prev) => (prev + 1) % totalGroups);
+    const prevSlide = () => setCurrent((prev) => (prev - 1 + totalGroups) % totalGroups);
+
+    // split logos into groups of 8
+    const groups = Array.from({ length: totalGroups }, (_, i) =>
+      logos.slice(i * groupSize, i * groupSize + groupSize)
+    );
+
+    return (
+      <div className="relative w-full">
+        {groups.map((group, index) => (
+          <div
+            key={index}
+            className={`grid grid-cols-4 gap-8 place-items-center transition-opacity duration-700 ${
+              index === current ? "opacity-100" : "opacity-0 hidden"
+            }`}
+          >
+            {group.map((src, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-center bg-gray-50 hover:bg-gray-100 transition rounded-xl shadow-sm p-4 w-40 h-24"
+              >
+                <img
+                  src={src}
+                  alt={`Logo ${index * groupSize + i + 1}`}
+                  className="w-32 h-20 object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        ))}
+
+        {/* Navigation buttons */}
+        <button
+          onClick={prevSlide}
+          className="absolute top-1/2 left-4 -translate-y-1/2 bg-sky-900 text-white rounded-full p-3 hover:bg-sky-700 shadow-lg z-10"
+        >
+          ‹
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute top-1/2 right-4 -translate-y-1/2 bg-sky-900 text-white rounded-full p-3 hover:bg-sky-700 shadow-lg z-10"
+        >
+          ›
+        </button>
+      </div>
+    );
+  })()}
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       {/* Footer */}
