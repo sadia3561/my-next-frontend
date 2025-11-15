@@ -43,7 +43,7 @@ export default function MapComponent() {
 
     const map = new maplibregl.Map({
       container: mapContainer.current,
-      style: "https://tiles.stadiamaps.com/styles/osm_bright.json",
+      style: "https://demotiles.maplibre.org/style.json",
       center: [78.9629, 22.5937], // India center
       zoom: 4.3,
     });
