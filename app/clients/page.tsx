@@ -5,6 +5,7 @@ import { Building2, Factory, Hospital, GraduationCap, Home, Store, Landmark } fr
 export default function ClientsPage() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 px-6 py-12">
+      <div className="pt-24"></div> 
       <h1 className="text-3xl font-bold text-blue-900 text-center mb-8">Our Clients</h1>
 
       <p className="text-center text-gray-700 mb-12">

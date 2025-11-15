@@ -7,11 +7,12 @@ export default function AboutusPage() {
   const [teamTab, setTeamTab] = useState("leadership"); // default tab in team
 
   return (
+    
     <div className="min-h-screen bg-gray-100 text-gray-900">
-      <div className="max-w-6xl mx-auto px-6 py-12">
+    <div className="pt-24"></div>  <div className="max-w-6xl mx-auto px-6 py-12">
         {/* Header */}
         <h1 className="text-4xl font-medium text-black mb-4 text-center">
-          AABHA NEXUS INNOVATIONS (ANI)
+          AABHA GLOBAL NEXUS INNOVATIONS (ANI)
         </h1>
         <h2 className="text-lg text-center text-gray-800 mb-8">
           Your Trusted Partner in MEPF & ELV Solutions
@@ -21,7 +22,7 @@ export default function AboutusPage() {
         <div className="flex flex-wrap justify-center gap-4 border-b border-gray-300 pb-3 mb-6">
           {[
             { id: "about", label: "About Us" },
-            { id: "team", label: "ANI Team" },
+            { id: "team", label: "AGNI Team" },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -44,9 +45,9 @@ export default function AboutusPage() {
         {mainTab === "about" && (
           <div className="grid md:grid-cols-2 gap-6">
             <div className="border border-gray-300 p-4">
-              <h3 className="text-xl font-medium mb-2">About ANI</h3>
+              <h3 className="text-xl font-medium mb-2">About AGNI</h3>
               <p className="text-base text-gray-800 leading-relaxed">
-                AABHA NEXUS INNOVATIONS (ANI) is a leading MEPF & ELV engineering
+                AABHA GLOBAL NEXUS INNOVATIONS (ANI) is a leading MEPF & ELV engineering
                 company offering design, consulting, project execution, and
                 lifecycle management. With a strong focus on quality, innovation,
                 and safety, ANI provides world-class solutions for industries,
@@ -58,7 +59,7 @@ export default function AboutusPage() {
             <div className="border border-gray-300 p-4">
               <h3 className="text-xl font-medium mb-2">Our Strength</h3>
               <p className="text-base text-gray-800 leading-relaxed">
-                At ANI, our strength lies in our people. Each member of our
+                At AGNI, our strength lies in our people. Each member of our
                 leadership and management team brings unique expertise, vision,
                 and dedication to drive innovation and excellence across our MEPF
                 & ELV solutions.
@@ -118,7 +119,7 @@ export default function AboutusPage() {
 
             {teamTab === "technology" && (
               <div className="grid md:grid-cols-2 gap-4">
-                <Card name="Vishal Dhami" title="Founder, Aeroyantra | IT Head (ANI)" phone="+91 90120 81297" email1="itaabhanexis@gmail.com" />
+                <Card name="Vishal Dhami" title="Founder, Aeroyantra | IT Head (AGNI)" phone="+91 90120 81297" email1="itaabhanexis@gmail.com" />
                 <Card name="Sadiya Bepari" title="Software Engineer" email1="itaabhanexis@gmail.com" />
               </div>
             )}

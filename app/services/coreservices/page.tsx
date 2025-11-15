@@ -18,25 +18,25 @@ const servicesData = {
       img: "/assets/ser8.jpg",
       title: "Electrical Systems",
       subtitle: "Reliable Power Distribution & Safety Management.",
-      text: "Electrical systems form the backbone of any project. At ANI, we design and implement safe, efficient, and reliable power distribution networks that ensure uninterrupted operations. Our solutions cover power supply, lighting, load management, earthing, and safety protections, reducing downtime and maximizing performance. With a strong focus on energy efficiency and compliance with international standards, we deliver systems that guarantee long-term safety, stability, and cost savings.",
+      text: "Electrical systems form the backbone of any project. At AGNI, we design and implement safe, efficient, and reliable power distribution networks that ensure uninterrupted operations. Our solutions cover power supply, lighting, load management, earthing, and safety protections, reducing downtime and maximizing performance. With a strong focus on energy efficiency and compliance with international standards, we deliver systems that guarantee long-term safety, stability, and cost savings.",
     },
     {
       img: "/assets/ser5.jpg",
       title: "HVAC Systems",
       subtitle: "Energy-Efficient Comfort, Ventilation & Air Quality.",
-      text: "Heating, Ventilation, and Air Conditioning (HVAC) systems are critical for maintaining a comfortable and healthy indoor environment. ANI provides energy-efficient HVAC designs that ensure temperature control, fresh air circulation, and humidity balance across residential, commercial, and industrial projects.Our systems not only create a comfortable atmosphere but also contribute to productivity, health, and energy conservation, making spaces both sustainable and people-friendly.",
+      text: "Heating, Ventilation, and Air Conditioning (HVAC) systems are critical for maintaining a comfortable and healthy indoor environment. AGNI provides energy-efficient HVAC designs that ensure temperature control, fresh air circulation, and humidity balance across residential, commercial, and industrial projects.Our systems not only create a comfortable atmosphere but also contribute to productivity, health, and energy conservation, making spaces both sustainable and people-friendly.",
     },
     {
       img: "/assets/ser7.jpg",
       title: "Plumbing Systems",
       subtitle: "Robust water supply, sanitation & drainage.",
-      text: "Plumbing infrastructure ensures the lifeline of water distribution in any facility. ANI delivers robust water supply, sanitation, and drainage systems designed for reliability, hygiene, and efficiency. From clean water supply to waste management, our solutions ensure continuous availability, proper pressure management,and leak prevention. By incorporating modern piping technologies and sustainable water practices, we provide systems that are safe, eco-friendly, and long-lasting.",
+      text: "Plumbing infrastructure ensures the lifeline of water distribution in any facility. AGNI delivers robust water supply, sanitation, and drainage systems designed for reliability, hygiene, and efficiency. From clean water supply to waste management, our solutions ensure continuous availability, proper pressure management,and leak prevention. By incorporating modern piping technologies and sustainable water practices, we provide systems that are safe, eco-friendly, and long-lasting.",
     },
     {
       img: "/assets/ser6.jpg",
       title: "Fire Fighting Systems",
       subtitle: "Advance protection ensuring life & property safety.",
-      text: "Safety is non-negotiable. ANI’s firefighting solutions are engineered to detect, suppress, and control fire emergencies effectively. Our systems include hydrants, sprinklers, extinguishers, and suppression systems,designed in compliance with NFPA, NBC, and IS standards. With advanced technology and strategic placement, we ensure quick response, minimal damage, and maximum safety. These systems not only safeguard lives and assets but also ensure legal compliance and peace of mind for every client. ",
+      text: "Safety is non-negotiable. AGNI’s firefighting solutions are engineered to detect, suppress, and control fire emergencies effectively. Our systems include hydrants, sprinklers, extinguishers, and suppression systems,designed in compliance with NFPA, NBC, and IS standards. With advanced technology and strategic placement, we ensure quick response, minimal damage, and maximum safety. These systems not only safeguard lives and assets but also ensure legal compliance and peace of mind for every client. ",
     },
     
    
@@ -46,7 +46,7 @@ const servicesData = {
       img: "/assets/ser11.jpg",
       title: "CCTV Surveillance",
       subtitle: "Continuos Monitoring & Security",
-      text: "ANI provides advanced CCTV solutions for round-the-clock surveillance. With HD & IP cameras, AI based analytics, and centralized monitoring, our systems ensure complete visibility, theft prevention, and incident recording. CCTV strengthens safety, accountability, and control, protecting people and assets. ",
+      text: "AGNI provides advanced CCTV solutions for round-the-clock surveillance. With HD & IP cameras, AI based analytics, and centralized monitoring, our systems ensure complete visibility, theft prevention, and incident recording. CCTV strengthens safety, accountability, and control, protecting people and assets. ",
     },
     {
       img: "/assets/ser1.jpg",
@@ -58,7 +58,7 @@ const servicesData = {
       img: "/assets/ser4.jpg",
       title: "Public Address",
       subtitle: "Effective Communication Across Facilities.",
-      text: "ANI’s PA systems are designed for instant communication, emergency announcements, and background audio. Ideal for campuses, industries, and commercial spaces, PA systems ensure clarity, reach, and reliability, making communication seamless during routine and critical situations. ",
+      text: "AGNI’s PA systems are designed for instant communication, emergency announcements, and background audio. Ideal for campuses, industries, and commercial spaces, PA systems ensure clarity, reach, and reliability, making communication seamless during routine and critical situations. ",
     },
     {
       img: "/assets/ser3.jpg",
@@ -70,13 +70,13 @@ const servicesData = {
       img: "/assets/ser20.jpg",
       title: "Access Control Systems",
       subtitle: "Smart Entry,Attendance & Security Control.",
-      text: "ANI offers biometric, RFID, and smart card-based access control solutions to secure entry/exit points and sensitive zones. Integrated with attendance management and visitor control, our systems ensure high security, efficiency, and accountability.",
+      text: "AGNI offers biometric, RFID, and smart card-based access control solutions to secure entry/exit points and sensitive zones. Integrated with attendance management and visitor control, our systems ensure high security, efficiency, and accountability.",
     },
     {
       img: "/assets/ser21.jpg",
       title: "Wi-Fi Solutions",
       subtitle: "Enterprise-Grade Wireless Access.",
-      text: "Seamless internet access is critical today. ANI provides secured Wi-Fi networks that deliver high bandwidth, scalability, and reliability across large facilities, ensuring mobility and uninterrupted productivity.",
+      text: "Seamless internet access is critical today. AGNI provides secured Wi-Fi networks that deliver high bandwidth, scalability, and reliability across large facilities, ensuring mobility and uninterrupted productivity.",
     },
     {
       img: "/assets/ser19.jpg",
@@ -88,14 +88,14 @@ const servicesData = {
       img: "/assets/ser25.jpg",
       title: "DFMD",
       subtitle: "Door Frame Metal Detector.",
-      text: "ANI’s DFMD solutions ensure reliable and efficient screening at entry points across airports, metros,industries, offices, and public facilities. Designed to detect concealed metallic objects, DFMDs enhance security by preventing unauthorized items from entering restricted zones. With high sensitivity, adjustable detection zones, and quick response time, ANI’s DFMDs provide seamless pedestrian flow without compromising safety, making them a trusted choice for corporate, government, and critical infrastructure sites.",
+      text: "AGNI’s DFMD solutions ensure reliable and efficient screening at entry points across airports, metros,industries, offices, and public facilities. Designed to detect concealed metallic objects, DFMDs enhance security by preventing unauthorized items from entering restricted zones. With high sensitivity, adjustable detection zones, and quick response time, AGNI’s DFMDs provide seamless pedestrian flow without compromising safety, making them a trusted choice for corporate, government, and critical infrastructure sites.",
     },
 
      {
       img: "/assets/ser12.jpg",
       title: "Rodent Repellent System",
       subtitle: "Prevents Damage to Cables & Equipment",
-      text: "Rodents pose serious threats to electrical wiring, data cables, and equipment. ANI offers ultrasonic rodent repellent systems that safeguard infrastructure, prevent costly damage, and maintain uninterrupted operations in sensitive areas like data centers and factories. ",
+      text: "Rodents pose serious threats to electrical wiring, data cables, and equipment. AGNI offers ultrasonic rodent repellent systems that safeguard infrastructure, prevent costly damage, and maintain uninterrupted operations in sensitive areas like data centers and factories. ",
     },
 
      {
@@ -109,49 +109,49 @@ const servicesData = {
       img: "/assets/ser2.jpg",
       title: "Boom Barrier",
       subtitle: "Controlled & Secure Vehicle Entry",
-      text: "For high-traffic and restricted zones, ANI installs boom barriers with RFID & ANPR integration for seamless yet secure vehicle management. They enhance security, access control, and traffic regulation in corporate, residential, and industrial environments. ",
+      text: "For high-traffic and restricted zones, AGNI installs boom barriers with RFID & ANPR integration for seamless yet secure vehicle management. They enhance security, access control, and traffic regulation in corporate, residential, and industrial environments. ",
     },
 
     {
       img: "/assets/ser15.jpg",
       title: "Audio & Video Solution ",
       subtitle: "Professional-Grade Conferencing & Entertainment.",
-      text: "ANI delivers world-class audio-visual systems for conference halls, training rooms, theaters, and auditoriums. Our solutions provide high-quality sound, crystal-clear visuals, and seamless integration, ensuring enhanced communication and impactful presentations.",
+      text: "AGNI delivers world-class audio-visual systems for conference halls, training rooms, theaters, and auditoriums. Our solutions provide high-quality sound, crystal-clear visuals, and seamless integration, ensuring enhanced communication and impactful presentations.",
     },
 
     {
       img: "/assets/ser22.jpg",
       title: "Nurse Calling",
       subtitle: "Smarter,Faster, Patient Care",
-      text: "ANI’s Nurse Calling Systems are designed to provide patients with instant access to medical staff,ensuring timely care and improved hospital efficiency. Ideal for hospitals, nursing homes, and healthcare facilities, NCS ensures safety, responsiveness, and comfort by enabling seamless communication between patients and caregivers during both routine needs and critical emergencies.",
+      text: "AGNI’s Nurse Calling Systems are designed to provide patients with instant access to medical staff,ensuring timely care and improved hospital efficiency. Ideal for hospitals, nursing homes, and healthcare facilities, NCS ensures safety, responsiveness, and comfort by enabling seamless communication between patients and caregivers during both routine needs and critical emergencies.",
     },
 
     {
       img: "/assets/ser26.jpg",
       title: "Baggage Scanner",
       subtitle: "Advanced Language Security Screening.",
-      text: "ANI’s Baggage Scanner systems deliver high-precision X-ray scanning for luggage, parcels, and cargo at entry points. Engineered for airports, malls, metros, hotels, and high-security facilities, these scanners identify explosives, weapons, contraband, and hidden threats with accuracy. Featuring dual-energy imaging, real-time monitoring, and user-friendly interfaces, ANI’s Baggage Scanners combine speed,reliability, and advanced detection to ensure safe and secure premises while maintaining smooth visitor movement.",
+      text: "AGNI’s Baggage Scanner systems deliver high-precision X-ray scanning for luggage, parcels, and cargo at entry points. Engineered for airports, malls, metros, hotels, and high-security facilities, these scanners identify explosives, weapons, contraband, and hidden threats with accuracy. Featuring dual-energy imaging, real-time monitoring, and user-friendly interfaces, AGNI’s Baggage Scanners combine speed,reliability, and advanced detection to ensure safe and secure premises while maintaining smooth visitor movement.",
     },
 
     {
       img: "/assets/ser23.jpg",
       title: "Flap Barrier",
       subtitle: "Smart & Secure Acess Control.",
-      text: "ANI’s Flap Barrier systems provide streamlined and secure entry management for commercial complexes,offices, metros, and high-security zones. Designed for controlled pedestrian movement, these barriers ensure fast, touchless, and authorized access while preventing tailgating or unauthorized entry. With their sleek design and durable build, ANI’s Flap Barriers combine aesthetics with advanced security, making them ideal for corporate, institutional, and transit environments.",
+      text: "AGNI’s Flap Barrier systems provide streamlined and secure entry management for commercial complexes,offices, metros, and high-security zones. Designed for controlled pedestrian movement, these barriers ensure fast, touchless, and authorized access while preventing tailgating or unauthorized entry. With their sleek design and durable build, ANI’s Flap Barriers combine aesthetics with advanced security, making them ideal for corporate, institutional, and transit environments.",
     },
 
     {
       img: "/assets/ser24.jpg",
       title: "Turnstile",
       subtitle: "Reliable Pedestrian Flow Management",
-      text: "ANI’s Turnstile solutions are engineered for efficient and controlled pedestrian access in high-traffic areas. From stadiums, factories, and transport hubs to corporate campuses, turnstiles provide robust entry security and accurate people counting. They are available in tripod, full-height, and waist-height designs,ensuring adaptability for different levels of security. Built with rugged mechanics and modern access control integration, ANI’s Turnstiles deliver long-lasting reliability, seamless integration, and uncompromised security.",
+      text: "AGNI’s Turnstile solutions are engineered for efficient and controlled pedestrian access in high-traffic areas. From stadiums, factories, and transport hubs to corporate campuses, turnstiles provide robust entry security and accurate people counting. They are available in tripod, full-height, and waist-height designs,ensuring adaptability for different levels of security. Built with rugged mechanics and modern access control integration, AGNI’s Turnstiles deliver long-lasting reliability, seamless integration, and uncompromised security.",
     },
 
     {
       img: "/assets/ser16.jpg",
       title: "Fire Separation Systems",
       subtitle: "Safety Partitions for Fire Containment",
-      text: "In emergencies, fire spread control is critical. ANI provides fire-rated doors, partitions, and enclosures to contain fire within a designated zone. This ensures structural integrity, occupant safety, and compliance with international fire safety standards. ",
+      text: "In emergencies, fire spread control is critical. AGNI provides fire-rated doors, partitions, and enclosures to contain fire within a designated zone. This ensures structural integrity, occupant safety, and compliance with international fire safety standards. ",
     },
 
      {
@@ -165,7 +165,7 @@ const servicesData = {
       img: "/assets/ser17.jpg",
       title: "Water Leak Detection(WLD)",
       subtitle: "Early Detection to Prevent Major Losses",
-      text: "Water leakage can cause extensive damage to IT systems, machinery, and infrastructure. ANI’s WLD systems provide early detection and precise alerts, helping prevent equipment failure, downtime, and costly repairs.",
+      text: "Water leakage can cause extensive damage to IT systems, machinery, and infrastructure. AGNI’s WLD systems provide early detection and precise alerts, helping prevent equipment failure, downtime, and costly repairs.",
     },
   ],
 };

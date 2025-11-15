@@ -150,9 +150,13 @@ export default function Home() {
         "/assets/featured3.jpg",
         "/assets/featured4.jpg",
         "/assets/featured5.jpg",
+        "/assets/featured6.jpg",
+        "/assets/featured7.jpg",
+        "/assets/featured8.jpg",
+        "/assets/featured9.jpg",
      
       ].map((src, i) => {
-        const indexDiff = (i - current + 5) % 5;
+        const indexDiff = (i - current + 9) % 9;
         let className =
           "absolute rounded-2xl shadow-[0_0_40px_rgba(56,189,248,0.4)] border border-sky-400/30 transition-all duration-700 ease-in-out object-cover object-center";
 
@@ -162,7 +166,7 @@ export default function Home() {
         else if (indexDiff === 1)
           className +=
             " w-[55%] h-[420px] z-20 scale-95 opacity-60 translate-x-[60%] brightness-75 blur-[1px]";
-        else if (indexDiff === 5)
+        else if (indexDiff === 9)
           className +=
             " w-[55%] h-[420px] z-20 scale-95 opacity-60 -translate-x-[60%] brightness-75 blur-[1px]";
         else className += " opacity-0 scale-75";
@@ -181,13 +185,13 @@ export default function Home() {
 
       {/* Navigation Buttons */}
       <button
-        onClick={() => setCurrent((prev) => (prev - 1 + 6) % 6)}
+        onClick={() => setCurrent((prev) => (prev - 1 + 10) % 10)}
         className="absolute left-8 top-1/2 -translate-y-1/2 bg-sky-800/70 hover:bg-sky-700/90 text-white p-4 rounded-full z-40 transition-all shadow-lg hover:scale-110 border border-sky-500/40"
       >
         ‹
       </button>
       <button
-        onClick={() => setCurrent((prev) => (prev + 1) % 6)}
+        onClick={() => setCurrent((prev) => (prev + 1) % 10)}
         className="absolute right-8 top-1/2 -translate-y-1/2 bg-sky-800/70 hover:bg-sky-700/90 text-white p-4 rounded-full z-40 transition-all shadow-lg hover:scale-110 border border-sky-500/40"
       >
         ›
@@ -197,7 +201,7 @@ export default function Home() {
 
   {/* Dots Indicator */}
   <div className="flex justify-center gap-3 mt-8">
-    {[0, 1, 2, 3, 4, 5].map((i) => (
+    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
       <button
         key={i}
         onClick={() => setCurrent(i)}
@@ -220,7 +224,7 @@ export default function Home() {
     
     {/* ✅ Combined Welcome Message */}
     <h2 className="text-3xl font-bold text-sky-900 mb-2">
-      WELCOME TO AABHA NEXUS INNOVATIONS
+      WELCOME TO AABHA GLOBAL NEXUS INNOVATIONS
     </h2>
     <h3 className="text-lg font-semibold text-sky-700 mb-4">
       Your Trusted Partner in MEPF & ELV Solutions
@@ -346,7 +350,7 @@ export default function Home() {
       Client Testimonials
     </h2>
     <p className="text-gray-600 mt-2">
-      Hear what our valued clients have to say about their experience with Aabha Nexus Innovations.
+      Hear what our valued clients have to say about their experience with Aabha Global Nexus Innovations.
     </p>
   </div>
 
@@ -467,7 +471,7 @@ export default function Home() {
         Have a Project Requirement? <br /> <span className="text-sky-700">Get in Touch</span>
       </h2>
       <p className="text-gray-700 text-sm md:text-base leading-relaxed max-w-md">
-        We’d love to discuss how Aabha Nexus Innovations can help make your next
+        We’d love to discuss how Aabha Global Nexus Innovations can help make your next
         project a success. Fill out the form and our team will connect with you shortly.
       </p>
     </div>

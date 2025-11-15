@@ -22,7 +22,7 @@ export default function RootLayout({
 
         {/* ✅ Footer ko yaha hi rakho */}
         <footer className="bg-blue-900 text-white p-6 text-center">
-          <p>&copy; 2025 ANI MEPF & ELV. All Rights Reserved.</p>
+          <p>&copy; 2025 AGNI MEPF & ELV. All Rights Reserved.</p>
         </footer>
       </body>
     </html>

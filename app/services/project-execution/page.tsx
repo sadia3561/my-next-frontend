@@ -6,6 +6,7 @@ import Image from "next/image";
 export default function ProjectExecutionPage() {
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-12 text-gray-900">
+      <div className="pt-24"></div> 
       <h1 className="text-3xl font-bold text-blue-900 mb-4"> Project Execution </h1>
       <p className="text-gray-700 leading-relaxed">
           our experienced execution team ensures seamless installation and implementation of <b>MEPF & ELV</b> 

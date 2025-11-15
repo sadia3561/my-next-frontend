@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 export default function VendorsPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-14 text-gray-800">
+      <div className="pt-24"></div> 
       <h2 className="text-3xl font-bold">Vendors</h2>
       <p className="mt-2 text-gray-600">
         Vendor onboarding, KYC, capability matrix and performance tracking.

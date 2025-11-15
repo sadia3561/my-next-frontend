@@ -68,8 +68,10 @@ export default function ProjectConsultant() {
   };
 
   return (
+    
     <div className="min-h-screen bg-gray-50 px-6 py-12 text-gray-900">
-      {/* Title */}
+    <div className="pt-24"></div>  
+     {/* Title */}
       <h1 className="text-3xl font-bold text-blue-900 mb-4">
         Project Consulting
       </h1>
@@ -78,7 +80,7 @@ export default function ProjectConsultant() {
       <p className="text-gray-700 leading-relaxed mb-8">
         We act as trusted advisors, offering independent consulting services to
         evaluate project feasibility, system selection, budgeting, and technical
-        compliance. <b>ANI</b> ensures clients receive the best solutions, cost
+        compliance. <b>AGNI</b> ensures clients receive the best solutions, cost
         efficiency, and risk mitigation strategies.
       </p>
 
@@ -93,9 +95,11 @@ export default function ProjectConsultant() {
         onMouseUp={onMouseUp}
         onMouseLeave={() => isDragging && onMouseUp()}
       >
-        <div
+        <div 
+        
           className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(${-index * 100}%)` }}
+          
         >
        
           
@@ -118,7 +122,9 @@ export default function ProjectConsultant() {
         </button>
 
         {/* Dots Indicators */}
+        
         <div className="flex justify-center gap-2 absolute bottom-4 w-full">
+          
           {IMAGES.map((_, i) => (
             <button
               key={i}
