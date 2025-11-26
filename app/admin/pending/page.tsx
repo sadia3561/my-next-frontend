@@ -161,3 +161,6 @@ export default function PendingApprovals() {
     </div>
   );
 }*/
+export default function Page() {
+  return <div></div>;
+}

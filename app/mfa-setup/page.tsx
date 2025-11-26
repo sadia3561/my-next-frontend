@@ -18,7 +18,7 @@ export default function MfaSetup() {
     try {
       const token = localStorage.getItem("token"); // token from login
 
-      const res = await fetch("http://localhost:4000/api/auth/mfa-setup", {
+      const res = await fetch("https://my-next-backend-production.up.railway.app/api/auth/mfa-setup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

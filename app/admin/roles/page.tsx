@@ -125,3 +125,6 @@ export default function AdminRolesPage() {
     </div>
   );
 }*/
+export default function Page() {
+  return <div></div>;
+}

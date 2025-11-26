@@ -161,3 +161,6 @@ export default function AdminQueuePage() {
     </div>
   );
 }*/
+export default function Page() {
+  return <div></div>;
+}

@@ -142,3 +142,6 @@ export default function AdminReviewPage() {
     </div>
   );
 }*/
+export default function Page() {
+  return <div></div>;
+}

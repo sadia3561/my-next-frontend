@@ -99,3 +99,6 @@ export default function KycUploadPage() {
     </div>
   );
 }*/
+export default function Page() {
+  return <div></div>;
+}

@@ -24,3 +24,6 @@ export default function PendingApproval() {
     </div>
   );
 }*/
+export default function Page() {
+  return <div></div>;
+}
