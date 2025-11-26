@@ -57,6 +57,7 @@ export default function Home() {
       setMessage("❌ " + err.message);
     }
   };
+  
 
   const nextImage = () => setCurrent((prev) => (prev + 1) % 5);
   const prevImage = () => setCurrent((prev) => (prev - 1 + 5) % 5);
