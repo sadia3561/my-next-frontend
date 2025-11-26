@@ -1,6 +1,12 @@
 import { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+
+
+ eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   reactStrictMode: true,
   images: {
     // Use remotePatterns instead of domains

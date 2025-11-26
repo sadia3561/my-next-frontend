@@ -80,3 +80,10 @@
     //</div>
  // );
 //}
+export default function KYCPage() {
+  return (
+    <div>
+      <h1>KYC Page</h1>
+    </div>
+  );
+}
