@@ -169,7 +169,7 @@ export default function PartnerRegistration() {
       formDataToSend.append("licenseDoc", formData.licenseDoc);
 
     try {
-      const res = await fetch("https://my-next-backend-17.onrender.com/auth/register-org", {
+      const res = await fetch("https://my-next-backend-production.up.railway.app/auth/register-org", {
         method: "POST",
         body: formDataToSend,
       });

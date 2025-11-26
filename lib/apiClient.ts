@@ -1,6 +1,6 @@
 // my-next-frontend/lib/apiClient.ts
 export async function apiFetch(path: string, opts: RequestInit = {}) {
-  const base = process.env.NEXT_PUBLIC_API_URL || 'https://my-next-backend-17.onrender.com';
+  const base = process.env.NEXT_PUBLIC_API_URL || 'https://my-next-backend-production.up.railway.app';
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
   const headers: HeadersInit = {

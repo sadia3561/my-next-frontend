@@ -16,7 +16,7 @@ export default function LoginPage() {
     setMessage("");
 
     try {
-      const res = await fetch("https://my-next-backend-17.onrender.com/auth/login", {
+      const res = await fetch("https://my-next-backend-production.up.railway.app/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
