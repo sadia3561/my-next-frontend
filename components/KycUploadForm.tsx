@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { apiPost } from "@/lib/api";
+import { apiPost } from "@/lib/apiClient";
 
 export default function KycUploadForm() {
   const [file, setFile] = useState<File | null>(null);

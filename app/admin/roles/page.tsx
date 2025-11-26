@@ -1,48 +1,65 @@
-"use client";
+/*"use client";
 
 import { useState, useEffect } from "react";
 
-interface UserRole {
-  id: number;
+interface User {
+  id: string;
   name: string;
   email: string;
-  currentRole: "SUPER_ADMIN" | "ORG_ADMIN" | "USER";
+  role: "SUPER_ADMIN" | "ORG_ADMIN" | "USER";
 }
 
-export default function AdminRolesPage() {
-  const [users, setUsers] = useState<UserRole[]>([]);
-  const [selectedUser, setSelectedUser] = useState<UserRole | null>(null);
+const API_BASE = "https://my-next-backend-production.up.railway.app";
 
-  // Dummy data
+export default function AdminRolesPage() {
+  const [users, setUsers] = useState<User[]>([]);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+  // Fetch users for role management
   useEffect(() => {
-    setUsers([
-      {
-        id: 1,
-        name: "Riya Mehta",
-        email: "riya@aabha.com",
-        currentRole: "ORG_ADMIN",
-      },
-      {
-        id: 2,
-        name: "Arjun Singh",
-        email: "arjun@buildpro.com",
-        currentRole: "USER",
-      },
-    ]);
+    fetch(`${API_BASE}/admin/users`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(async (res) => {
+        const text = await res.text();
+
+        try {
+          return JSON.parse(text);
+        } catch {
+          console.error("Backend not returning JSON:", text);
+          return [];
+        }
+      })
+      .then((data) => setUsers(data))
+      .catch((err) => console.error("Error fetching users:", err));
   }, []);
 
-  const updateRole = (id: number, role: UserRole["currentRole"]) => {
-    setUsers((prev) =>
-      prev.map((u) => (u.id === id ? { ...u, currentRole: role } : u))
-    );
-    setSelectedUser(null);
+  const updateRole = async (id: string, newRole: User["role"]) => {
+    try {
+      const res = await fetch(`${API_BASE}/admin/users/${id}/role`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role: newRole }),
+      });
+
+      if (!res.ok) throw new Error("Failed to update role");
+
+      // Update UI
+      setUsers((prev) =>
+        prev.map((u) => (u.id === id ? { ...u, role: newRole } : u))
+      );
+
+      setSelectedUser(null);
+    } catch (err) {
+      console.error(err);
+      alert("Error updating role");
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
-      <h1 className="text-2xl font-semibold mb-6 text-gray-800">
-        Admin Role Management
-      </h1>
+      <h1 className="text-2xl font-semibold mb-6 text-gray-800">Role Management</h1>
 
       <div className="bg-white rounded-xl shadow-md overflow-x-auto">
         <table className="min-w-full border text-left">
@@ -54,14 +71,14 @@ export default function AdminRolesPage() {
               <th className="p-3 border">Action</th>
             </tr>
           </thead>
+
           <tbody>
             {users.map((user) => (
               <tr key={user.id} className="border-b hover:bg-gray-50">
                 <td className="p-3 border">{user.name}</td>
                 <td className="p-3 border">{user.email}</td>
-                <td className="p-3 border text-blue-700 font-medium">
-                  {user.currentRole}
-                </td>
+                <td className="p-3 border text-blue-700 font-medium">{user.role}</td>
+
                 <td className="p-3 border">
                   <button
                     onClick={() => setSelectedUser(user)}
@@ -76,7 +93,7 @@ export default function AdminRolesPage() {
         </table>
       </div>
 
-      {/* Role edit modal */}
+      {/* Modal }
       {selectedUser && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-lg w-[400px]">
@@ -86,9 +103,9 @@ export default function AdminRolesPage() {
 
             <select
               className="border w-full p-2 mb-4 rounded"
-              value={selectedUser.currentRole}
+              value={selectedUser.role}
               onChange={(e) =>
-                updateRole(selectedUser.id, e.target.value as UserRole["currentRole"])
+                updateRole(selectedUser.id, e.target.value as User["role"])
               }
             >
               <option value="SUPER_ADMIN">SUPER_ADMIN</option>
@@ -107,4 +124,4 @@ export default function AdminRolesPage() {
       )}
     </div>
   );
-}
+}*/

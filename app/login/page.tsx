@@ -16,7 +16,7 @@ export default function LoginPage() {
     setMessage("");
 
     try {
-      const res = await fetch("https://my-next-backend-production.up.railway.app/api/auth/login", {
+      const res = await fetch("https://my-next-backend-17.onrender.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -25,30 +25,30 @@ export default function LoginPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Login failed");
 
+      // 👉 Store token
       localStorage.setItem("token", data.token);
+
+      // 👉 Store rememberMe
       if (rememberMe) localStorage.setItem("rememberMe", "true");
+
+      // ⭐⭐⭐ FIX: Store Prisma role EXACTLY as backend gives ⭐⭐⭐
+      localStorage.setItem("role", data.user.role);
 
       setMessage("✅ Login successful! Redirecting...");
 
+      // ⭐⭐ ROLE WISE REDIRECT FIX ⭐⭐
       const role = data.user.role;
-      switch (role) {
-        case "super_admin":
-          router.push("/app/dashboard");
-          break;
-        case "client_admin":
-          router.push("/app/org/profile");
-          break;
-        case "vendor_admin":
-        case "supplier_admin":
-          router.push("/app/kyc/submit");
-          break;
-        case "consultant":
-        case "transporter":
-          router.push("/app/dashboard");
-          break;
-        default:
-          router.push("/app/profile");
+
+      // ADMIN → Approval page
+      if (role === "ADMIN") {
+        router.push("/admin/approval");
+        return;
       }
+
+      // ✔ For ALL OTHER USERS (Designer, Vendor, Engineer, Supplier, etc.)
+      // Directly open Profile Page
+      router.push("/profile");
+
     } catch (err: any) {
       setMessage("❌ " + err.message);
     }
@@ -56,10 +56,9 @@ export default function LoginPage() {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gray-100 overflow-hidden">
-      {/* 🌐 Full Page Background Logo */}
       <div className="absolute inset-0 w-full h-full opacity-20 blur-[2px] select-none">
         <Image
-          src="/logoo.png" // 👈 apna logo path (public folder me)
+          src="/logoo.png"
           alt="Background Logo"
           fill
           className="object-contain object-center"
@@ -67,11 +66,8 @@ export default function LoginPage() {
         />
       </div>
 
-      {/* 🟦 Login Box */}
       <div className="relative z-10 max-w-md w-full bg-white/90 p-8 rounded-2xl shadow-2xl backdrop-blur-[3px]">
-        <h2 className="text-2xl font-bold text-blue-900 mb-6 text-center">
-          Login
-        </h2>
+        <h2 className="text-2xl font-bold text-blue-900 mb-6 text-center">Login</h2>
 
         {message && (
           <p
@@ -111,6 +107,7 @@ export default function LoginPage() {
               />
               <span>Remember me</span>
             </label>
+
             <a href="/forgot-password" className="text-blue-600 hover:underline">
               Forgot Password?
             </a>

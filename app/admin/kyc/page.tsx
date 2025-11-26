@@ -1,143 +1,82 @@
-"use client";
+//"use client";
 
-import { useState, useEffect } from "react";
+//import { useEffect, useState } from 'react';
+//import { apiFetch } from '@/lib/apiClient';
 
-interface KYC {
-  id: number;
-  orgName: string;
-  applicant: string;
-  email: string;
-  submittedOn: string;
-  status: "Pending" | "Verified" | "Rejected" | "Correction";
-}
+//type KYC = {
+  //id: string;
+  //user: { id: string; name?: string; email?: string };
+  //documentType?: string;
+  //createdAt: string;
+  //status: 'PENDING'|'APPROVED'|'REJECTED';
+  //orgName?: string;
+//};
 
-export default function AdminKycReviewPage() {
-  const [kycList, setKycList] = useState<KYC[]>([]);
-  const [selectedKyc, setSelectedKyc] = useState<KYC | null>(null);
+//export default function AdminKycPage() {
+ // const [list, setList] = useState<KYC[]>([]);
+ // const [selected, setSelected] = useState<KYC | null>(null);
 
-  // 🔹 Backend se fetch karna
-  useEffect(() => {
-    fetch("http://localhost:3000/admin/kycs")
-      .then((res) => res.json())
-      .then((data) => setKycList(data))
-      .catch((err) => console.error("Error fetching KYC list:", err));
-  }, []);
+  //useEffect(() => {
+    //apiFetch('/admin/kyc-queue')
+      //.then(r => r.json())
+      //.then(setList)
+      //.catch(err => console.error(err));
+  //}, []);
 
-  const updateStatus = async (id: number, newStatus: string) => {
-    try {
-      await fetch(`http://localhost:3000/admin/kyc/${id}/status`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: newStatus }),
-      });
-      setKycList((prev) =>
-        prev.map((k) => (k.id === id ? { ...k, status: newStatus as any } : k))
-      );
-      setSelectedKyc(null);
-    } catch (error) {
-      console.error("Error updating KYC status:", error);
-    }
-  };
+  //const updateStatus = async (id: string, status: string) => {
+    //try {
+      //await apiFetch(`/admin/kyc/${id}/status`, {
+        //method: 'PATCH',
+        //headers: { 'Content-Type': 'application/json' },
+        //body: JSON.stringify({ status }),
+      //});
+      //setList(prev => prev.map(p => p.id === id ? { ...p, status } : p));
+      //setSelected(null);
+      //alert('Updated');
+    //} catch (err) {
+     // console.error(err);
+     // alert('Failed');
+   // }
+  //};
 
-  return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <h1 className="text-2xl font-semibold mb-6 text-gray-800">
-        Admin KYC Review Queue
-      </h1>
+  //return (
+    //<div className="min-h-screen p-8 bg-gray-100">
+      //<h1 className="text-xl font-semibold mb-4">Admin — KYC Queue</h1>
+      //<div className="bg-white rounded shadow overflow-auto">
+       // <table className="min-w-full">
+         // <thead className="bg-gray-200">
+           // <tr><th className="p-2">User</th><th>Email</th><th>Submitted</th><th>Status</th><th>Action</th></tr>
+          //</thead>
+          //<tbody>
+           // {list.map(k => (
+             // <tr key={k.id} className="border-b">
+               // <td className="p-2">{k.user?.name || k.orgName}</td>
+                //<td className="p-2">{k.user?.email}</td>
+                //<td className="p-2">{new Date(k.createdAt).toLocaleString()}</td>
+                //<td className="p-2">{k.status}</td>
+               // <td className="p-2">
+                 // <button onClick={() => setSelected(k)} className="px-3 py-1 bg-blue-600 text-white rounded">Review</button>
+                //</td>
+              //</tr>
+          //  ))}
+        //  </tbody>
+        //</table>
+      //</div>
 
-      <div className="overflow-x-auto bg-white rounded-xl shadow-md">
-        <table className="min-w-full text-left border">
-          <thead className="bg-gray-200 text-gray-700 uppercase text-sm">
-            <tr>
-              <th className="p-3 border">Org Name</th>
-              <th className="p-3 border">Applicant</th>
-              <th className="p-3 border">Email</th>
-              <th className="p-3 border">Submitted</th>
-              <th className="p-3 border">Status</th>
-              <th className="p-3 border">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {kycList.map((kyc) => (
-              <tr key={kyc.id} className="border-b hover:bg-gray-50">
-                <td className="p-3 border">{kyc.orgName}</td>
-                <td className="p-3 border">{kyc.applicant}</td>
-                <td className="p-3 border">{kyc.email}</td>
-                <td className="p-3 border">{kyc.submittedOn}</td>
-                <td
-                  className={`p-3 border font-medium ${
-                    kyc.status === "Verified"
-                      ? "text-green-600"
-                      : kyc.status === "Rejected"
-                      ? "text-red-600"
-                      : "text-yellow-600"
-                  }`}
-                >
-                  {kyc.status}
-                </td>
-                <td className="p-3 border">
-                  <button
-                    onClick={() => setSelectedKyc(kyc)}
-                    className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
-                  >
-                    Review
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Modal */}
-      {selectedKyc && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white w-[400px] rounded-lg p-6 shadow-lg">
-            <h2 className="text-lg font-semibold mb-4">
-              Review KYC Application
-            </h2>
-            <p>
-              <strong>Org:</strong> {selectedKyc.orgName}
-            </p>
-            <p>
-              <strong>Applicant:</strong> {selectedKyc.applicant}
-            </p>
-            <p>
-              <strong>Email:</strong> {selectedKyc.email}
-            </p>
-            <p className="mb-4">
-              <strong>Status:</strong> {selectedKyc.status}
-            </p>
-
-            <div className="flex justify-between mt-4">
-              <button
-                onClick={() => updateStatus(selectedKyc.id, "Verified")}
-                className="bg-green-600 text-white px-3 py-1 rounded"
-              >
-                Verify
-              </button>
-              <button
-                onClick={() => updateStatus(selectedKyc.id, "Rejected")}
-                className="bg-red-600 text-white px-3 py-1 rounded"
-              >
-                Reject
-              </button>
-              <button
-                onClick={() => updateStatus(selectedKyc.id, "Correction")}
-                className="bg-yellow-500 text-white px-3 py-1 rounded"
-              >
-                Correction
-              </button>
-              <button
-                onClick={() => setSelectedKyc(null)}
-                className="text-gray-700 border px-3 py-1 rounded"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
+      //{selected && (
+        //<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          //<div className="bg-white p-6 rounded w-[480px]">
+            //<h2 className="text-lg font-semibold mb-2">Review</h2>
+            //<p><strong>User:</strong> {selected.user?.name}</p>
+            //<p><strong>Email:</strong> {selected.user?.email}</p>
+            //<p className="mt-4 flex gap-2">
+              //<button onClick={() => updateStatus(selected.id, 'APPROVED')} className="bg-green-600 px-3 py-1 text-white rounded">Approve</button>
+              //<button onClick={() => updateStatus(selected.id, 'REJECTED')} className="bg-red-600 px-3 py-1 text-white rounded">Reject</button>
+              //<button onClick={() => setSelected(null)} className="px-3 py-1 border rounded">Close</button>
+            //</p>
+          //</div>
+        //</div>
+     // )}
+    //</div>
+ // );
+//}

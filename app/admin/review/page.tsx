@@ -1,4 +1,5 @@
-"use client";
+//admin/review/page.tsx
+/*"use client";
 
 import { useState } from "react";
 
@@ -91,7 +92,7 @@ export default function AdminReviewPage() {
         </table>
       </div>
 
-      {/* Modal for detail review */}
+      {/* Modal for detail review }
       {selectedReg && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white w-[400px] rounded-lg p-6 shadow-lg">
@@ -140,4 +141,4 @@ export default function AdminReviewPage() {
       )}
     </div>
   );
-}
+}*/

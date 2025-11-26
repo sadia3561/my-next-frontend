@@ -2,12 +2,29 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
+
+  const [role, setRole] = useState<string | null>(null);
+  
+  
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
+
+
+    // ✅ Load role from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedRole = localStorage.getItem("role");
+      console.log("Loaded role:", storedRole);
+      setRole(storedRole);
+    }
+  }, []);
+
+ 
+
 
   return (
    <nav className="fixed top-0 left-0 w-full bg-blue-900 text-white p-4 flex justify-between items-center z-[999] shadow-lg">
@@ -111,6 +128,28 @@ export default function Navbar() {
         <li><Link href="/suggestion-box" className="hover:text-yellow-300 whitespace-nowrap">Suggestion Box</Link></li>
         <li><Link href="/contact" className="hover:text-yellow-300">Contact</Link></li>
         <li><Link href="/login" className="hover:text-yellow-300">Login</Link></li>
+        
+        {/* ✅ Admin Approval Button */}
+         {role === "admin" && (
+          <li>
+            <Link href="/admin/approval" className="text-yellow-300 font-semibold">
+              Approval
+            </Link>
+          </li>
+        )}
+
+        {/* ------------------------------- */}
+        {/* ✅ User Profile Link */}
+        {/* Only show for logged-in users (role USER) */}
+        {/* ✅ Profile link appears only if any role is set */}
+        {role && (
+          <li>
+            <Link href="/profile" className="text-yellow-300 font-semibold">
+              Profile
+            </Link>
+          </li>
+        )}
+
       </ul>
 
       {/* Mobile Menu Button */}

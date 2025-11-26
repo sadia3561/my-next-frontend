@@ -1,4 +1,5 @@
-"use client";
+//admin/queue/page.tsx
+/*"use client";
 
 import { useState, useEffect } from "react";
 
@@ -12,6 +13,12 @@ interface QueueItem {
   status: "PENDING" | "VERIFIED" | "REJECTED";
   createdAt: string;
 }
+
+//http://localhost:3000/admin/roles
+//http://localhost:3000/admin/kyc
+//http://localhost:3000/admin/review
+//http://localhost:3000/admin/queue
+
 
 export default function AdminQueuePage() {
   const [queue, setQueue] = useState<QueueItem[]>([]);
@@ -105,7 +112,7 @@ export default function AdminQueuePage() {
         </table>
       </div>
 
-      {/* Modal */}
+      {/* Modal }
       {selected && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-lg w-[400px]">
@@ -153,4 +160,4 @@ export default function AdminQueuePage() {
       )}
     </div>
   );
-}
+}*/

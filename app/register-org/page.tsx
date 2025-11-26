@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { auth } from "@/lib/firebaseConfig";
-import { sendEmailVerification, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  sendEmailVerification,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
-
-
-
-interface FormData {
+interface FormDataType {
   orgName: string;
   gstin: string;
   address: string;
@@ -26,11 +26,10 @@ interface FormData {
   description?: string;
 }
 
-
-
 export default function PartnerRegistration() {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>({
+
+  const [formData, setFormData] = useState<FormDataType>({
     orgName: "",
     gstin: "",
     address: "",
@@ -49,90 +48,128 @@ export default function PartnerRegistration() {
     description: "",
   });
 
- const [emailSent, setEmailSent] = useState(false);     // Email verification link bhejne ke liye
-const [emailVerified, setEmailVerified] = useState(false); // Email verify hone ke baad true hoga
-const [loading, setLoading] = useState(false);         // Loading indicator ke liye
+  const [emailSent, setEmailSent] = useState(false);
+  const [emailVerified, setEmailVerified] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-
-
- 
-
- 
-  // ---------------- HANDLE INPUT CHANGE ----------------
+  // -----------------------------------------
+  // HANDLE INPUT CHANGE
+  // -----------------------------------------
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value, files } = e.target as HTMLInputElement;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
+
+    if (name === "kycDoc") {
+      if (files && files.length > 0) {
+        setFormData((prev) => ({ ...prev, kycDoc: files[0] }));
+      }
+      return;
+    }
+
+    if (name === "licenseDoc") {
+      if (files && files.length > 0) {
+        setFormData((prev) => ({ ...prev, licenseDoc: files[0] }));
+      }
+      return;
+    }
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Send email verification
+  // -----------------------------------------
+  // SEND EMAIL VERIFICATION
+  // -----------------------------------------
   const handleSendEmailVerification = async () => {
     if (!formData.email) {
-      alert("Please enter your email first.");
+      alert("Please enter email first.");
       return;
     }
 
     setLoading(true);
     try {
-      const tempPassword = Math.random().toString(36).slice(-8); // temporary password
-      const userCredential = await createUserWithEmailAndPassword(
+      const tempPassword = Math.random().toString(36).slice(-8);
+
+      const userCred = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         tempPassword
       );
 
-      await sendEmailVerification(userCredential.user);
+      await sendEmailVerification(userCred.user);
+
+      alert(`Verification email sent to ${formData.email}`);
       setEmailSent(true);
-      alert(`✅ Verification email sent to ${formData.email}. Please check your inbox.`);
-    } catch (error: any) {
-      console.error(error);
-      alert(`❌ Error sending verification email: ${error.message}`);
+    } catch (err: any) {
+      if (err.code === "auth/email-already-in-use") {
+        alert("This email already exists.");
+        return;
+      }
+      console.log(err);
     } finally {
       setLoading(false);
     }
   };
 
-  // Verify email
+  // -----------------------------------------
+  // VERIFY EMAIL
+  // -----------------------------------------
   const handleVerifyEmail = async () => {
     try {
       const user = auth.currentUser;
       if (!user) {
-        alert("No user found. Please request verification email again.");
+        alert("No user found. Send verification email again.");
         return;
       }
 
       await user.reload();
+
       if (user.emailVerified) {
         setEmailVerified(true);
-        alert("✅ Email verified successfully!");
+        alert("Email verified successfully!");
       } else {
-        alert("⚠️ Email not verified yet. Please check your inbox.");
+        alert("Email not verified yet. Check your inbox.");
       }
-    } catch (error: any) {
-      console.error(error);
-      alert("❌ Error verifying email: " + error.message);
+    } catch (err: any) {
+      alert("Error verifying email: " + err.message);
     }
   };
 
+  // -----------------------------------------
+  // SUBMIT FORM
+  // -----------------------------------------
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!emailVerified) {
-      alert("Please verify your email before submitting.");
+      alert("Please verify email before submitting.");
       return;
     }
 
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    // -------- BUILD FORM DATA --------
     const formDataToSend = new FormData();
+
     Object.entries(formData).forEach(([key, value]) => {
-      if (value !== null) formDataToSend.append(key, value as any);
+      if (key !== "kycDoc" && key !== "licenseDoc") {
+        if (value !== null && value !== "") {
+          formDataToSend.append(key, value as string);
+        }
+      }
     });
 
+    if (formData.kycDoc)
+      formDataToSend.append("kycDoc", formData.kycDoc);
+
+    if (formData.licenseDoc)
+      formDataToSend.append("licenseDoc", formData.licenseDoc);
+
     try {
-      const res = await fetch("https://my-next-backend-production.up.railway.app/auth/register-org", {
+      const res = await fetch("https://my-next-backend-17.onrender.com/auth/register-org", {
         method: "POST",
         body: formDataToSend,
       });
@@ -140,30 +177,64 @@ const [loading, setLoading] = useState(false);         // Loading indicator ke l
       const data = await res.json();
 
       if (res.ok) {
-        alert("✅ Registration submitted successfully! Waiting for admin approval.");
-        console.log("Server response:", data);
+        alert("Registration submitted! Await admin approval.");
+
+        // Reset values
+        setFormData({
+          orgName: "",
+          gstin: "",
+          address: "",
+          kycDoc: null,
+          contactName: "",
+          designation: "",
+          email: "",
+          phone: "",
+          website: "",
+          businessType: "",
+          experience: "",
+          licenseDoc: null,
+          username: "",
+          password: "",
+          confirmPassword: "",
+          description: "",
+        });
+
         setStep(1);
+        setEmailSent(false);
+        setEmailVerified(false);
+
+        await auth.signOut();
       } else {
-        alert("❌ Error submitting form: " + data.message);
+        alert("Error: " + (data.message || "Unknown error"));
       }
-    } catch (error) {
-      console.error(error);
-      alert("Error submitting form. Please try again.");
-    }
+   } catch (error: any) {
+  const message =
+    error?.response?.data?.message ||
+    error?.message ||
+    "Something went wrong";
+
+  alert("Error: " + message);
+}
+
+
   };
 
-  const nextStep = () => setStep((prev) => prev + 1);
-  const prevStep = () => setStep((prev) => prev - 1);
+  // -----------------------------------------
+  // STEP CONTROLS
+  // -----------------------------------------
+  const nextStep = () => setStep((s) => s + 1);
+  const prevStep = () => setStep((s) => s - 1);
+
+  
+  
 
   return (
-    
     <div className="min-h-screen bg-gray-100 py-10 px-6">
       <div className="pt-24"></div>
-  <div className="w-full bg-white border border-gray-300 rounded-none shadow-sm p-10 text-sm">
+      <div className="w-full bg-white border border-gray-300 rounded-none shadow-sm p-10 text-sm">
         <h2 className="text-center text-lg font-semibold text-blue-900 mb-6 tracking-wide uppercase border-b pb-2">
-  Partner Registration Portal
-</h2>
-
+          Partner Registration Portal
+        </h2>
 
         <form onSubmit={handleSubmit} className="text-gray-700">
           {/* ---------------- STEP 1 ---------------- */}
@@ -190,7 +261,6 @@ const [loading, setLoading] = useState(false);         // Loading indicator ke l
                     value={formData.gstin}
                     onChange={handleChange}
                     className="border border-gray-300 p-2 rounded w-full"
-                    required
                   />
                 </div>
                 <div className="md:col-span-2">
@@ -203,17 +273,18 @@ const [loading, setLoading] = useState(false);         // Loading indicator ke l
                     required
                   />
                 </div>
+                {/* ======= KYC Upload ======= */}
                 <div className="md:col-span-2">
-                  <label className="block mb-1">Upload KYC Document</label>
+                  <label className="block mb-1">Upload KYC Document(s)</label>
                   <input
                     type="file"
                     name="kycDoc"
                     onChange={handleChange}
                     className="border border-gray-300 p-2 rounded w-full"
                   />
+                 
                 </div>
               </div>
-
               <div className="flex justify-end mt-6">
                 <button
                   type="button"
@@ -225,7 +296,6 @@ const [loading, setLoading] = useState(false);         // Loading indicator ke l
               </div>
             </div>
           )}
-
           {/* ---------------- STEP 2 ---------------- */}
           {step === 2 && (
             <div>
@@ -324,6 +394,7 @@ const [loading, setLoading] = useState(false);         // Loading indicator ke l
                   />
                 </div>
               </div>
+              
 
               <div className="flex justify-between mt-6">
                 <button

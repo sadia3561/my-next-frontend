@@ -1,4 +1,4 @@
-import { apiPost, apiGet } from "./api";
+import { apiPost, apiGet } from "./apiClient";
 
 /**
  * Register a new user
