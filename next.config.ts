@@ -1,22 +1,41 @@
 import { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-
-
- eslint: {
+  eslint: {
     ignoreDuringBuilds: true,
   },
 
   reactStrictMode: true,
+
   images: {
-    // Use remotePatterns instead of domains
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',       // allow any remote host, or replace with specific hosts
-        pathname: '/**',     
+        hostname: '**',
+        pathname: '/**',
       },
     ],
+  },
+
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: `
+              default-src 'self';
+              connect-src 'self' https://my-next-backend-production.up.railway.app https://*.vercel.app;
+              img-src * blob: data:;
+              script-src 'self' 'unsafe-inline' 'unsafe-eval';
+              style-src 'self' 'unsafe-inline';
+              frame-src *;
+            `.replace(/\n/g, " "),
+          },
+        ],
+      },
+    ];
   },
 };
 
