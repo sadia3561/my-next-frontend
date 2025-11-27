@@ -1,3 +1,4 @@
+//components/KycUploadForm.tsx
 "use client";
 
 import { useState } from "react";
@@ -26,7 +27,7 @@ export default function KycUploadForm() {
       formData.append("file", file);
 
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000"}/api/kyc/upload`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/kyc/upload`,
         {
           method: "POST",
           body: formData,
