@@ -169,10 +169,11 @@ export default function PartnerRegistration() {
       formDataToSend.append("licenseDoc", formData.licenseDoc);
 
     try {
-      const res = await fetch("https://my-next-backend-production.up.railway.app/api/auth/register-org", {
-        method: "POST",
-        body: formDataToSend,
-      });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/register-org`, {
+  method: "POST",
+  body: formDataToSend,
+});
+
 
       const data = await res.json();
 
