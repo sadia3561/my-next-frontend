@@ -26,12 +26,33 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: `
               default-src 'self';
-              connect-src 'self' https://my-next-backend-production.up.railway.app https://*.vercel.app;
-              img-src * blob: data:;
-              script-src 'self' 'unsafe-inline' 'unsafe-eval';
-              style-src 'self' 'unsafe-inline';
-              frame-src *;
-            `.replace(/\n/g, " "),
+
+              connect-src 'self'
+                https://my-next-backend-production.up.railway.app
+                https://*.vercel.app
+                https://identitytoolkit.googleapis.com
+                https://securetoken.googleapis.com
+                https://firebase.googleapis.com
+                https://firestore.googleapis.com
+                https://www.googleapis.com;
+
+              img-src 'self' data: blob: *;
+              
+              script-src
+                'self'
+                'unsafe-inline'
+                'unsafe-eval';
+
+              style-src
+                'self'
+                'unsafe-inline';
+
+              frame-src
+                'self'
+                https://*.firebaseapp.com
+                https://*.google.com
+                https://*.vercel.app;
+            `.replace(/\s+/g, " ").trim(),
           },
         ],
       },
