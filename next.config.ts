@@ -31,7 +31,7 @@ const nextConfig: NextConfig = {
 
               connect-src 'self'
                 ${isDev ? "http://localhost:4000" : ""}
-                https://my-next-backend-production.up.railway.app
+                https://endearing-trust-production.up.railway.app
                 https://my-next-frontend-seven.vercel.app
                 https://my-next-frontend-sadiyas-projects-67d7bf27.vercel.app
                 https://my-next-frontend-git-main-sadiyas-projects-67d7bf27.vercel.app
