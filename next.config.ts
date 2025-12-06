@@ -1,5 +1,7 @@
 import { NextConfig } from 'next';
 
+const isDev = process.env.NODE_ENV === "development";
+
 const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
@@ -28,6 +30,7 @@ const nextConfig: NextConfig = {
               default-src 'self';
 
               connect-src 'self'
+                ${isDev ? "http://localhost:4000" : ""}
                 https://my-next-backend-production.up.railway.app
                 https://*.vercel.app
                 https://identitytoolkit.googleapis.com
@@ -37,18 +40,12 @@ const nextConfig: NextConfig = {
                 https://www.googleapis.com;
 
               img-src 'self' data: blob: *;
-              
-              script-src
-                'self'
-                'unsafe-inline'
-                'unsafe-eval';
 
-              style-src
-                'self'
-                'unsafe-inline';
+              script-src 'self' 'unsafe-inline' 'unsafe-eval';
 
-              frame-src
-                'self'
+              style-src 'self' 'unsafe-inline';
+
+              frame-src 'self'
                 https://*.firebaseapp.com
                 https://*.google.com
                 https://*.vercel.app;
