@@ -32,6 +32,10 @@ const nextConfig: NextConfig = {
               connect-src 'self'
                 ${isDev ? "http://localhost:4000" : ""}
                 https://my-next-backend-production.up.railway.app
+                https://my-next-frontend-seven.vercel.app
+                https://my-next-frontend-sadiyas-projects-67d7bf27.vercel.app
+                https://my-next-frontend-git-main-sadiyas-projects-67d7bf27.vercel.app
+                https://my-next-frontend-8644rh4ws-sadiyas-projects-67d7bf27.vercel.app
                 https://*.vercel.app
                 https://identitytoolkit.googleapis.com
                 https://securetoken.googleapis.com
@@ -41,11 +45,17 @@ const nextConfig: NextConfig = {
 
               img-src 'self' data: blob: *;
 
-              script-src 'self' 'unsafe-inline' 'unsafe-eval';
+              script-src
+                'self'
+                'unsafe-inline'
+                'unsafe-eval';
 
-              style-src 'self' 'unsafe-inline';
+              style-src
+                'self'
+                'unsafe-inline';
 
-              frame-src 'self'
+              frame-src
+                'self'
                 https://*.firebaseapp.com
                 https://*.google.com
                 https://*.vercel.app;
