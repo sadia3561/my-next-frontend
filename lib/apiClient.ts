@@ -1,5 +1,5 @@
 export async function apiFetch(path: string, opts: RequestInit = {}) {
-  const base = process.env.NEXT_PUBLIC_API_URL || 'https://my-next-backend-production.up.railway.app';
+  const base = process.env.NEXT_PUBLIC_API_URL || 'https://endearing-trust-production.up.railway.app';
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
   // 🔥 FIX: force headers to a string->string record

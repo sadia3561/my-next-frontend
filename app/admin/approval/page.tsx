@@ -34,7 +34,7 @@ export default function Approvals() {
 
   const fetchPending = async (token: string) => {
     try {
-      const res = await axios.get("https://my-next-backend-production.up.railway.app/api/admin/approval", {
+      const res = await axios.get("https://endearing-trust-production.up.railway.app/api/admin/approval", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPending(res.data);
@@ -84,7 +84,7 @@ export default function Approvals() {
 
 const handleApprove = async (id: string) => {
   const token = localStorage.getItem("token");
-  await axios.patch(`https://my-next-backend-production.up.railway.app/api/admin/approve/${id}`, {}, {
+  await axios.patch(`https://https://endearing-trust-production.up.railway.app/api/admin/approve/${id}`, {}, {
     headers: { Authorization: `Bearer ${token}` },
   });
   location.reload();
@@ -92,7 +92,7 @@ const handleApprove = async (id: string) => {
 
 const handleReject = async (id: string) => {
   const token = localStorage.getItem("token");
-  await axios.patch(`https://my-next-backend-production.up.railway.app/api/admin/reject/${id}`, {}, {
+  await axios.patch(`https://https://endearing-trust-production.up.railway.app/api/admin/reject/${id}`, {}, {
     headers: { Authorization: `Bearer ${token}` },
   });
   location.reload();

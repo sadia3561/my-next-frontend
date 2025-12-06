@@ -27,7 +27,7 @@ export default function KycUploadForm() {
       formData.append("file", file);
 
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "https://my-next-backend-production.up.railway.app"}/api/kyc/upload`,
+        `${process.env.NEXT_PUBLIC_API_URL || "https://endearing-trust-production.up.railway.app"}/api/kyc/upload`,
         {
           method: "POST",
           body: formData,
