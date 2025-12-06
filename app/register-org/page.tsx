@@ -169,7 +169,7 @@ export default function PartnerRegistration() {
       formDataToSend.append("licenseDoc", formData.licenseDoc);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/register-org`, {
+      const res = await fetch(`https://endearing-trust-production.up.railway.app/api/auth/register-org`, {
   method: "POST",
   body: formDataToSend,
 });
