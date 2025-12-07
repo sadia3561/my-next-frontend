@@ -151,6 +151,12 @@ export default function PartnerRegistration() {
       return;
     }
 
+     // Validate businessType / role
+  if (!formData.businessType || formData.businessType.trim() === "") {
+    alert("Please select your Business Type / Role.");
+    return;
+  }
+
     // -------- BUILD FORM DATA --------
     const formDataToSend = new FormData();
 
