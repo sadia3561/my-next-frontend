@@ -9,6 +9,7 @@ export default function Approvals() {
   const router = useRouter();
   const [pending, setPending] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [pressedButton, setPressedButton] = useState<string | null>(null);
 
   useEffect(() => {
     // wait for nextjs hydration
@@ -45,74 +46,7 @@ export default function Approvals() {
     }
   };
 
-
-
-   
-  // ➕ ADD: Move handleApprove INSIDE component and add UI feedback
-  const handleApprove = async (id: string) => {
-    const token = localStorage.getItem("token");
-
-    // ➕ ADD: temporary UI "Approving..."
-    setPending((prev: any) =>
-      prev.map((o: any) =>
-        o.id === id ? { ...o, approving: true } : o
-      )
-    );
-
-    try {
-      await axios.patch(
-        `https://endearing-trust-production.up.railway.app/api/admin/approve/${id}`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      // ➕ ADD: remove from UI instantly
-      setPending((prev: any) => prev.filter((o: any) => o.id !== id));
-    } catch (err) {
-      alert("Error approving");
-      // rollback UI state
-      setPending((prev: any) =>
-        prev.map((o: any) =>
-          o.id === id ? { ...o, approving: false } : o
-        )
-      );
-    }
-  };
-
-  // ➕ ADD: Move handleReject INSIDE component and add UI feedback
-  const handleReject = async (id: string) => {
-    const token = localStorage.getItem("token");
-
-    setPending((prev: any) =>
-      prev.map((o: any) =>
-        o.id === id ? { ...o, rejecting: true } : o
-      )
-    );
-
-    try {
-      await axios.patch(
-        `https://endearing-trust-production.up.railway.app/api/admin/reject/${id}`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      // remove from UI
-      setPending((prev: any) => prev.filter((o: any) => o.id !== id));
-    } catch (err) {
-      alert("Error rejecting");
-      setPending((prev: any) =>
-        prev.map((o: any) =>
-          o.id === id ? { ...o, rejecting: false } : o
-        )
-      );
-    }
-  };
-
-
-
-
-
-
+  
 
   if (loading)
     return <p className="p-6 text-gray-600">Loading approvals...</p>;
@@ -134,21 +68,20 @@ export default function Approvals() {
           <div className="flex gap-3 mt-3">
             <button
               onClick={() => handleApprove(org.id)}
-              disabled={org.approving} 
-              className={`text-white px-4 py-2 rounded-md ${
-                org.approving ? "bg-gray-400" : "bg-green-600"
-              }`}                                           
+              className={`bg-green-600 text-white px-4 py-2 rounded-md ${
+                pressedButton === `approve-${org.id}` ? "scale-95" : "scale-100" // <--- aeromark: scale effect
+              } transition-transform duration-100`}
+              
             >
-              {org.approving ? "Approving..." : "Approve"}   
+              Approve
             </button>
             <button
               onClick={() => handleReject(org.id)}
-              disabled={org.rejecting}                      
-              className={`text-white px-4 py-2 rounded-md ${
-                org.rejecting ? "bg-gray-400" : "bg-red-600"
-              }`}                                            
+             className={`bg-red-600 text-white px-4 py-2 rounded-md ${
+                pressedButton === `reject-${org.id}` ? "scale-95" : "scale-100" // <--- aeromark: scale effect
+              } transition-transform duration-100`}
             >
-              {org.rejecting ? "Rejecting..." : "Reject"}   
+              Reject
             </button>
           </div>
         </div>
@@ -157,3 +90,18 @@ export default function Approvals() {
   );
 }
 
+const handleApprove = async (id: string) => {
+  const token = localStorage.getItem("token");
+  await axios.patch(`https://endearing-trust-production.up.railway.app/api/admin/approve/${id}`, {}, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  location.reload();
+};
+
+const handleReject = async (id: string) => {
+  const token = localStorage.getItem("token");
+  await axios.patch(`https://endearing-trust-production.up.railway.app/api/admin/reject/${id}`, {}, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  location.reload();
+};
