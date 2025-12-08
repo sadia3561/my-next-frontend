@@ -45,6 +45,75 @@ export default function Approvals() {
     }
   };
 
+
+
+   
+  // ➕ ADD: Move handleApprove INSIDE component and add UI feedback
+  const handleApprove = async (id: string) => {
+    const token = localStorage.getItem("token");
+
+    // ➕ ADD: temporary UI "Approving..."
+    setPending((prev: any) =>
+      prev.map((o: any) =>
+        o.id === id ? { ...o, approving: true } : o
+      )
+    );
+
+    try {
+      await axios.patch(
+        `https://endearing-trust-production.up.railway.app/api/admin/approve/${id}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      // ➕ ADD: remove from UI instantly
+      setPending((prev: any) => prev.filter((o: any) => o.id !== id));
+    } catch (err) {
+      alert("Error approving");
+      // rollback UI state
+      setPending((prev: any) =>
+        prev.map((o: any) =>
+          o.id === id ? { ...o, approving: false } : o
+        )
+      );
+    }
+  };
+
+  // ➕ ADD: Move handleReject INSIDE component and add UI feedback
+  const handleReject = async (id: string) => {
+    const token = localStorage.getItem("token");
+
+    setPending((prev: any) =>
+      prev.map((o: any) =>
+        o.id === id ? { ...o, rejecting: true } : o
+      )
+    );
+
+    try {
+      await axios.patch(
+        `https://endearing-trust-production.up.railway.app/api/admin/reject/${id}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      // remove from UI
+      setPending((prev: any) => prev.filter((o: any) => o.id !== id));
+    } catch (err) {
+      alert("Error rejecting");
+      setPending((prev: any) =>
+        prev.map((o: any) =>
+          o.id === id ? { ...o, rejecting: false } : o
+        )
+      );
+    }
+  };
+
+
+
+
+
+
+
   if (loading)
     return <p className="p-6 text-gray-600">Loading approvals...</p>;
 
@@ -65,15 +134,21 @@ export default function Approvals() {
           <div className="flex gap-3 mt-3">
             <button
               onClick={() => handleApprove(org.id)}
-              className="bg-green-600 text-white px-4 py-2 rounded-md"
+              disabled={org.approving} 
+              className={`text-white px-4 py-2 rounded-md ${
+                org.approving ? "bg-gray-400" : "bg-green-600"
+              }`}                                           
             >
-              Approve
+              {org.approving ? "Approving..." : "Approve"}   
             </button>
             <button
               onClick={() => handleReject(org.id)}
-              className="bg-red-600 text-white px-4 py-2 rounded-md"
+              disabled={org.rejecting}                      
+              className={`text-white px-4 py-2 rounded-md ${
+                org.rejecting ? "bg-gray-400" : "bg-red-600"
+              }`}                                            
             >
-              Reject
+              {org.rejecting ? "Rejecting..." : "Reject"}   
             </button>
           </div>
         </div>
@@ -82,18 +157,3 @@ export default function Approvals() {
   );
 }
 
-const handleApprove = async (id: string) => {
-  const token = localStorage.getItem("token");
-  await axios.patch(`https://endearing-trust-production.up.railway.app/api/admin/approve/${id}`, {}, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  location.reload();
-};
-
-const handleReject = async (id: string) => {
-  const token = localStorage.getItem("token");
-  await axios.patch(`https://endearing-trust-production.up.railway.app/api/admin/reject/${id}`, {}, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  location.reload();
-};
