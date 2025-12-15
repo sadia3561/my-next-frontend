@@ -128,6 +128,7 @@ export default function RegistrationForm({ role }: RegistrationFormProps) {
       className="space-y-6 p-4 sm:p-6 max-w-full sm:max-w-4xl mx-auto bg-white rounded-lg shadow"
     >
       {/* Section A */}
+      <div className="pt-24"></div>
       <h2 className="text-xl font-semibold">Section A: Client Information</h2>
       <input type="text" name="clientName" placeholder="Client/Organization Name" onChange={handleChange} className="w-full p-2 border rounded" />
       <input type="text" name="registeredAddress" placeholder="Registered Address" onChange={handleChange} className="w-full p-2 border rounded" />

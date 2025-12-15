@@ -43,6 +43,7 @@ export default function AboutusPage() {
 
         {/* About Content */}
         {mainTab === "about" && (
+          <>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="border border-gray-300 p-4">
               <h3 className="text-xl font-medium mb-2">About AGNI</h3>
@@ -50,7 +51,7 @@ export default function AboutusPage() {
                 AABHA GLOBAL NEXUS INNOVATIONS (ANI) is a leading MEPF & ELV engineering
                 company offering design, consulting, project execution, and
                 lifecycle management. With a strong focus on quality, innovation,
-                and safety, ANI provides world-class solutions for industries,
+                and safety, AGNI provides world-class solutions for industries,
                 corporates, healthcare, education, government, and real estate
                 projects.
               </p>
@@ -66,7 +67,60 @@ export default function AboutusPage() {
               </p>
             </div>
           </div>
-        )}
+        
+
+
+
+
+      
+    {/* GAP BETWEEN SECTIONS */}
+<div className="mt-20"></div>
+
+{/* Organization at a Glance Section */}
+<div className="w-full bg-[#020617] py-16">
+  <div className="max-w-6xl mx-auto flex flex-col items-center px-4">
+
+    <h1 className="text-2xl md:text-3xl font-semibold text-white mb-10 text-center">
+      AGNI Pvt. Ltd. – Organization at a Glance
+    </h1>
+
+    <div className="space-y-3 w-full max-w-xs">
+      
+      <div className="bg-[#1e293b] text-center rounded-lg py-4 shadow-md">
+        <p className="text-2xl font-bold text-[#38bdf8]">10</p>
+        <p className="text-sm text-gray-300 mt-1">
+          Board & Executive Positions
+        </p>
+      </div>
+
+      <div className="bg-[#1e293b] text-center rounded-lg py-4 shadow-md">
+        <p className="text-2xl font-bold text-[#38bdf8]">9</p>
+        <p className="text-sm text-gray-300 mt-1">
+          Major Divisions
+        </p>
+      </div>
+
+      <div className="bg-[#1e293b] text-center rounded-lg py-4 shadow-md">
+        <p className="text-2xl font-bold text-[#38bdf8]">50+</p>
+        <p className="text-sm text-gray-300 mt-1">
+          Senior Management Roles
+        </p>
+      </div>
+
+      <div className="bg-[#1e293b] text-center rounded-lg py-4 shadow-md">
+        <p className="text-2xl font-bold text-[#38bdf8]">4</p>
+        <p className="text-sm text-gray-300 mt-1">
+          Regional Operations
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</>
+  )}
+
 
         {/* Team Content */}
         {mainTab === "team" && (

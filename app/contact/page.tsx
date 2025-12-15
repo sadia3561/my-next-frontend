@@ -22,7 +22,7 @@ export default function ContactPage() {
         <div className="flex items-start gap-3 mb-3">
           <MapPin className="w-5 h-5 text-red-600 mt-1" />
           <p>
-            <b>Registered Office:</b> 69, 60 Feet Road, Rajrooppur, Prayagraj, 211011
+            <b>Registered Office:</b> Unit No. 8125, 8th Floor, Gaur City Mall Office Space, Sector 4, Greater Noida West, Uttar Pradesh 201318
           </p>
         </div>
 

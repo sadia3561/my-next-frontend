@@ -86,8 +86,10 @@ export default function ConsultantForm() {
     <form
       onSubmit={handleSubmit}
       className="space-y-4 p-4 sm:p-6 max-w-full sm:max-w-4xl mx-auto bg-white rounded-lg shadow"
+      
     >
       {/* Section A */}
+      <div className="pt-24"></div>
       <h2 className="text-xl font-semibold">Section A: Consultant Information</h2>
       <input type="text" name="companyName" placeholder="Company Name" onChange={handleChange} className="w-full p-2 border rounded" />
       <input type="text" name="registeredAddress" placeholder="Registered Address" onChange={handleChange} className="w-full p-2 border rounded" />

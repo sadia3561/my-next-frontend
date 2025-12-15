@@ -90,6 +90,7 @@ export default function EngineerForm() {
       className="space-y-4 p-4 sm:p-6 max-w-full sm:max-w-4xl mx-auto bg-white rounded-lg shadow"
     >
       {/* Section A */}
+      <div className="pt-24"></div>
       <h2 className="text-xl font-semibold">Section A: Personal Information</h2>
       <input type="text" name="fullName" placeholder="Full Name of Engineer" onChange={handleChange} className="w-full p-2 border rounded" />
       <input type="text" name="fathersname" placeholder="Father's/ Spouse's Name" onChange={handleChange} className="w-full p-2 border rounded" />

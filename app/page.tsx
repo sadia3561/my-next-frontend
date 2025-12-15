@@ -441,6 +441,26 @@ export default function Home() {
           ))}
         </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
         {/* Navigation Buttons */}
         <button
           onClick={goPrevTestimonials}
@@ -630,6 +650,19 @@ export default function Home() {
       <footer className="bg-sky-900 text-white text-center py-4 mt-10 text-sm">
           
       </footer>
+
+
+
+
+       
+
+    
+
+
+
+
+
+
     </main>
   );
 }

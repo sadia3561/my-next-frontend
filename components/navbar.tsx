@@ -12,6 +12,10 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
+  const [servicesLockedByClick, setServicesLockedByClick] = useState(false);
+  const [ourpartnerOpen, setOurpartnerOpen] = useState(false); 
+  const [ourpartnerLocked, setOurpartnerLocked] = useState(false); 
+
 
 
     // ✅ Load role from localStorage on mount
@@ -52,14 +56,33 @@ export default function Navbar() {
         {/* Services Dropdown */}
         <li
           className="relative"
-          onMouseEnter={() => setServicesDropdownOpen(true)}
-          onMouseLeave={() => setServicesDropdownOpen(false)}
+           onMouseEnter={() => {
+    if (!servicesLockedByClick) setServicesDropdownOpen(true);  
+    // hover open only if not locked by click
+  }}
+  onMouseLeave={() => {
+    if (!servicesLockedByClick) setServicesDropdownOpen(false);
+    // hover leave close only if not locked by click
+  }} 
         >
           <button
             type="button"
-            className="hover:text-yellow-300 flex items-center focus:outline-none"
+            className="hover:text-yellow-300 flex items-center gap-1 pr-2"
             aria-haspopup="true"
             aria-expanded={servicesDropdownOpen}
+
+              // ✅ CLICK LOGIC ADDED
+    onClick={() => {
+      // If already locked → unlock + close dropdown
+      if (servicesLockedByClick) {
+        setServicesLockedByClick(false);
+        setServicesDropdownOpen(false);
+      } else {
+        // Lock dropdown open
+        setServicesLockedByClick(true);
+        setServicesDropdownOpen(true);
+      }
+    }}
           >
             Services
             <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,7 +107,11 @@ export default function Navbar() {
                   <Link
                     href={link}
                     className="block px-4 py-2 text-sm hover:bg-blue-700 hover:text-yellow-300 transition-all border-b border-blue-700 last:border-none"
-                  >
+                    onClick={() => {
+              setServicesDropdownOpen(false);
+              setServicesLockedByClick(false);
+            }}
+                 >
                     {name}
                   </Link>
                 </li>
@@ -120,10 +147,60 @@ export default function Navbar() {
           )}
         </li>
 
-        <li><Link href="/clients" className="hover:text-yellow-300">Clients</Link></li>
-        <li><Link href="/vendors" className="hover:text-yellow-300">Vendors</Link></li>
-        <li><Link href="/suppliers" className="hover:text-yellow-300">Suppliers</Link></li>
-        <li><Link href="/consultants" className="hover:text-yellow-300 whitespace-nowrap">Consultants & Engineers</Link></li>
+
+       
+
+        {/* ---------------- STAKEHOLDERS ---------------- */}
+        <li
+          className="relative"
+          onMouseEnter={() => { if (!ourpartnerLocked) setOurpartnerOpen(true); }}      // ⭐ ADDED
+          onMouseLeave={() => { if (!ourpartnerLocked) setOurpartnerOpen(false); }}    // ⭐ ADDED
+        >
+         <button
+            className="hover:text-yellow-300 flex items-center"
+            onClick={() => {                                                            // ⭐ CLICK LOCK ADDED
+              if (ourpartnerLocked) {
+                setOurpartnerLocked(false);
+                setOurpartnerOpen(false);
+              } else {
+                setOurpartnerLocked(true);
+                setOurpartnerOpen(true);
+              }
+            }}
+          >
+            Our Partner
+            <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          {ourpartnerOpen && (
+            <ul className="absolute top-full left-0 w-56 mt-2 bg-blue-900 border border-yellow-400 rounded-md shadow-xl z-[9999]">
+              {[
+                ["Clients", "/clients"],
+                ["Vendors", "/vendors"],
+                ["Suppliers", "/suppliers"],
+                ["Consultants & Engineers", "/consultants"],
+              ].map(([name, link]) => (
+                <li key={name}>
+                  <Link
+                    href={link}
+                    className="block px-4 py-2 hover:bg-blue-700 hover:text-yellow-300 border-b border-blue-700 last:border-none"
+                    onClick={() => {
+                      setOurpartnerLocked(false);                     // ⭐ ADDED
+                      setOurpartnerOpen(false);                       // ⭐ ADDED
+                    }}
+                  >
+                    {name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+
+
         <li><Link href="/career" className="hover:text-yellow-300">Career</Link></li>
         <li><Link href="/suggestion-box" className="hover:text-yellow-300 whitespace-nowrap">Suggestion Box</Link></li>
         <li><Link href="/contact" className="hover:text-yellow-300">Contact</Link></li>
