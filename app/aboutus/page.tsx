@@ -23,6 +23,7 @@ export default function AboutusPage() {
           {[
             { id: "about", label: "About Us" },
             { id: "team", label: "AGNI Team" },
+           
           ].map((tab) => (
             <button
               key={tab.id}
@@ -44,21 +45,33 @@ export default function AboutusPage() {
         {/* About Content */}
         {mainTab === "about" && (
           <>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-1 gap-6">
             <div className="border border-gray-300 p-4">
-              <h3 className="text-xl font-medium mb-2">About AGNI</h3>
+              <h3 className="text-xl font-bold mb-2">About AGNI Pvt. Ltd.</h3>
               <p className="text-base text-gray-800 leading-relaxed">
-                AABHA GLOBAL NEXUS INNOVATIONS (ANI) is a leading MEPF & ELV engineering
-                company offering design, consulting, project execution, and
-                lifecycle management. With a strong focus on quality, innovation,
-                and safety, AGNI provides world-class solutions for industries,
-                corporates, healthcare, education, government, and real estate
-                projects.
+               About AGNI Pvt. Ltd.
+
+AGNI is a forward-thinking technology and engineering enterprise dedicated to designing, developing, implementing, and operating advanced solutions that shape the future of infrastructure and digital transformation. With a strong foundation in Artificial Intelligence (AI), Machine Learning (ML), Automation, and Robotics, we deliver state-of-the-art systems for industrial, commercial, and smart infrastructure applications.
+
+We specialize in providing Smart Infrastructure and Smart City solutions through integrated control, monitoring, and automation systems for utilities, mobility, energy management, environment, and urban safety.
+
+AGNI Pvt. Ltd. also excels in delivering comprehensive MEPF (Mechanical, Electrical, Plumbing & Firefighting) and ELV (Extra Low Voltage) engineering services. Our offerings include design, installation, testing, commissioning, and maintenance of building systems alongside integrated facility solutions.
+
+With a strong focus on Cyber Security and Digital Defence, we provide advanced services such as network security, ethical hacking, vulnerability assessment, digital forensics, data protection, and risk management for enterprises and government organizations.
+
+In addition, we offer end-to-end Data Network Infrastructure, Cloud Technology, and IoT (Internet of Things) solutions that enable enterprise connectivity, data centers, automation, and digital transformation at scale.
+
+AGNI Pvt. Ltd. also establishes and operates Research & Development and Technology Innovation Labs dedicated to advancing new technologies, AI applications, smart systems integration, and sustainable engineering practices.
+
+Driven by innovation, excellence, and a commitment to transformative engineering, AGNI Pvt. Ltd. aims to lead the industry with intelligent, secure, and sustainable solutions for a smarter future.
+
               </p>
             </div>
 
+            
+
             <div className="border border-gray-300 p-4">
-              <h3 className="text-xl font-medium mb-2">Our Strength</h3>
+              <h3 className="text-xl font-bold mb-2">Our Strength.</h3>
               <p className="text-base text-gray-800 leading-relaxed">
                 At AGNI, our strength lies in our people. Each member of our
                 leadership and management team brings unique expertise, vision,
@@ -66,6 +79,34 @@ export default function AboutusPage() {
                 & ELV solutions.
               </p>
             </div>
+
+              <div className="border border-gray-300 p-4">
+              <h3 className="text-xl font-bold mb-2">Founders Message.</h3>
+              <p className="text-base text-gray-800 leading-relaxed">
+                
+
+Welcome to AGNI Pvt. Ltd.
+
+When we founded AGNI, our vision was clear—to build a company that not only delivers engineering excellence but also leads the transformation toward intelligent, secure, and sustainable infrastructure. In a world that is evolving faster than ever, we believe that innovation must be practical, technology must be purposeful, and every solution must create measurable value.
+
+At AGNI, we combine the power of Artificial Intelligence, Automation, Robotics, MEPF expertise, and advanced ELV & Cyber Security systems to shape the future of industrial, commercial, and smart infrastructure. Our commitment goes beyond delivering projects; we strive to create integrated ecosystems that enhance efficiency, safety, and long-term sustainability for our clients and communities.
+
+Every milestone we achieve is a reflection of our team’s dedication, passion, and relentless pursuit of excellence. We continuously invest in research, development, and emerging technologies to ensure that AGNI remains at the forefront of innovation.
+
+To all our clients, partners, and stakeholders—thank you for your trust and support. Your belief in our capabilities inspires us to push boundaries, innovate fearlessly, and deliver solutions that stand the test of time.
+
+We look forward to building a smarter, safer, and more connected future—together.
+
+<br />
+Warm regards,
+KULDEEP
+<br />
+Founder,
+AGNI Pvt. Ltd.
+              </p>
+            </div>
+
+
           </div>
         
 
@@ -132,6 +173,19 @@ export default function AboutusPage() {
                 { id: "operations", label: "Operations" },
                 { id: "legal", label: "Legal" },
                 { id: "technology", label: "Technology" },
+                { id: "boardofdirectors", label: "Board Of Directors" },
+                { id: "officeoftheceo", label: "Office Of The CEO" },
+                { id: "strategic", label: "Strategic & Administrative Leadership" },
+                { id: "business", label: "Business & Projects Division" },
+                { id: "design", label: "Engineering & Design Division" },
+                { id: "technologydivision", label: "Technology, R&D & Innovation Division" },
+                { id: "financial", label: "Financial & Commerical Division" },
+                { id: "SalesMarketing", label: "Sales, Marketing & Branding Division" },
+                { id: "hrtraining", label: "HR, Training & Culture Division" },
+                { id: "legalquality", label: "Legal,Quality & Compliance Division" },
+                { id: "sales", label: "Sales & Purchase Legal Division" },
+                { id: "operationslogistics", label: "Operations, Logistics & Support Division" },
+
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -177,6 +231,179 @@ export default function AboutusPage() {
                 <Card name="Sadiya Bepari" title="Software Engineer" email1="itaabhanexis@gmail.com" />
               </div>
             )}
+
+
+
+
+
+
+             {teamTab === "boardofdirectors" && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <Card name="xxx" title="Chairman" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Foundar & Managing Director" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Technology & Innovation" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Finance & Corporate Governance" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Strategy & Global Alliances" phone="+91 ***" email1="info@aabhanexus.com" />
+                
+              </div>
+            )}
+            
+             {teamTab === "officeoftheceo" && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <Card name="xxx" title="Chief Executive Officer(CEO)" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Executive Assistant to the CEO" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Chief of Staff" phone="+91 ***" email1="info@aabhanexus.com" />
+               
+                
+              </div>
+            )}
+
+              {teamTab === "strategic" && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <Card name="xxx" title="Chief Operating Officer (COO)" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Chief Financial Officer (CFO)" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Chief Technology Officer (CTO)" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Chief Business Officer (CBO)" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Chief Marketing Officer (CMO)" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Chief Human Resources Officer (CHRO)" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Chief Strategy Officer (CSO)" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Chief Compliance & Governance Officer (CCGO)" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Chief Procurement Officer (CPO)" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Chief Information Security Officer (CISO)" phone="+91 ***" email1="info@aabhanexus.com" />
+               
+                
+              </div>
+            )}
+
+
+             {teamTab === "business" && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <Card name="xxx" title="VP- Business Operations & Delivery" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="GM- Project Management" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="AGM- Project Execution" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Regional Head- North" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Regional Head- South" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Regional Head- West" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Regional Head- East" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Project Managers (MEP,ELV,Automation)" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Site Engineers & Supervisors" email1="info@aabhanexus.com" />
+     
+              </div>
+            )}
+
+            {teamTab === "design" && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <Card name="xxx" title="Director- Engineering Excellence" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="GM- MEP Design" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="AGM- ELV Design" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="Head- Fire Engineering" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="Head- HVAC Design" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="Head- Electrical Engineering" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="Head- Public Health Engineering(PHE)" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="Head- Automation & System Integration" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="3D Modelling & BIM Head" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="BIM Specialists(Revit,Navisworks)" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+                 <Card name="xxx" title="CAD Team- Draftsmen & Detailers" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+     
+              </div>
+            )}
+               
+
+              {teamTab === "technologydivision" && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <Card name="xxx" title="CTO Office- Technology Architects" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="Head- AI & Automation Systems" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="Head-IoT & Smart Infrastructure" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="R&D Lab Director" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="AI Engineers/ Data Scientists" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="Software Development Team" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="Network & Cybersecurity Engineering Team" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+     
+              </div>
+            )}
+
+
+             {teamTab === "financial" && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <Card name="xxx" title="CFO Office- TCore Finance Team" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Head- Accounts & Taxation" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Head-Financial Planning & Analysis (FP&A)" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Head- Budgeting & Cost Control" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Head- Billing & Contracts" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Procurement & Vendor Management Team" phone="+91 ***" email1="info@aabhanexus.com" />
+     
+              </div>
+            )}
+
+
+             {teamTab === "SalesMarketing" && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <Card name="xxx" title="Business Head- Sales & Growth" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="GM- Corporate Sales" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="AGM- Government & PSU Projects" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Head- Key Accounts & Client Relations" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Head- Digital Marketing" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Branding & Content Team" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Tendering & Bidding Team" phone="+91 ***" email1="info@aabhanexus.com" />
+     
+              </div>
+            )}
+
+
+            {teamTab === "hrtraining" && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <Card name="xxx" title="GM- Human Resources" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="Talent Acquisition Specialists" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="HR Operations & Payroll" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Learning & Development (L&D) Head" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Employee Engagement & culture Team" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Tendering & Bidding Team" phone="+91 ***" email1="info@aabhanexus.com" />
+     
+              </div>
+            )}
+              
+
+
+               {teamTab === "legalquality" && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <Card name="xxx" title="Head- Legal Affairs" email1="legalaabhanexus@gmail.com" />
+                <Card name="xxx" title="Head- Contracts & Claims" phone="+91 ***" email1="legalaabhanexus@gmail.com" />
+                <Card name="xxx" title="Head- Quality Assurance & Quality Control(QA/QC)" phone="+91 ***" email1="legalaabhanexus@gmail.com" />
+                <Card name="xxx" title="Head- Health,Safety & Environment (HSE)" email1="legalaabhanexus@gmail.com" />
+     
+              </div>
+            )}
+
+
+               {teamTab === "sales" && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <Card name="xxx" title="Head- Sales & Purchase Legal Compliance" email1="legalaabhanexus@gmail.com" />
+                <Card name="xxx" title="Senior Legal Advisor- Commerical & Procurement" phone="+91 ***" email1="legalaabhanexus@gmail.com" />
+                <Card name="xxx" title="Legal Officer- Vendor Contracts" phone="+91 ***" email1="legalaabhanexus@gmail.com" />
+                <Card name="xxx" title="Legal Officer- Purchase Agreements" email1="legalaabhanexus@gmail.com" />
+                <Card name="xxx" title="Legal Officer- Customer Contracts & Policy Compliance" phone="+91 ***" email1="legalaabhanexus@gmail.com" />
+                <Card name="xxx" title="Documentation & Legal Records Team" phone="+91 ***" email1="legalaabhanexus@gmail.com" />
+     
+              </div>
+            )}
+
+
+            {teamTab === "operationslogistics" && (
+              <div className="grid md:grid-cols-2 gap-4">
+                <Card name="xxx" title="Head- Operations & Coordination" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Head- Logistics & Supply Chain" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Warehouse Management Team" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Fleet & Transport Team" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="IT Support & Infrastructure Team" phone="+91 ***" email1="itaabhanexis@gmail.com" />
+                <Card name="xxx" title="Supporting Teams" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Admin & Facility Management" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Customer Support Desk" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Documentation & Reporting Office" phone="+91 ***" email1="info@aabhanexus.com" />
+                <Card name="xxx" title="Technical Training Academy" phone="+91 ***" email1="info@aabhanexus.com" />
+     
+              </div>
+            )}
+                
           </div>
         )}
       </div>

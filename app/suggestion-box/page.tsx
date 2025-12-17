@@ -39,8 +39,11 @@ export default function SuggestionBox() {
   };
 
   return (
+    
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
+      
       <div className="w-full max-w-2xl bg-white border border-gray-300 p-6">
+        <div className="pt-24"></div>
         <h2 className="text-2xl font-medium text-black mb-4 text-center">
           Suggestion Box
         </h2>

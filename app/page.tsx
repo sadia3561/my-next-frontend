@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { LogIn, MessageSquare, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import LiveNewsSection from "@/components/LiveNewsSection";
+
 
 export default function Home() {
   
@@ -43,7 +45,7 @@ export default function Home() {
     e.preventDefault();
     setMessage("");
     try {
-      const res = await fetch("https://endearing-trust-production.up.railway.app/api/auth/login", {
+      const res = await fetch("http://localhost:4000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -127,6 +129,10 @@ export default function Home() {
           )}
         </div>
       </header>
+
+      {/* 🔴 ADDED: Live News Section */}
+<LiveNewsSection />
+
 
 
  {/* 🌆 Featured Projects Section */}
